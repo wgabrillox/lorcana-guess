@@ -1,0 +1,11 @@
+.noninkEmpty {
+  position: absolute;
+  top: 16px;
+  left: 17px;
+}
+
+.inkEmpty {
+  position: absolute;
+  top: 11px;
+  left: 3px;
+}
