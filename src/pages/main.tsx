@@ -32,6 +32,7 @@ export const Main = (props: Props) => {
     }
     setSelectedDevTools({ ...selectedDevTools, ...updatedOption });
   };
+  console.log("selectedCard", selectedCard);
 
   return (
     // <div>{cards && cards.map((card, idx) => <p key={idx}>{card.name}</p>)}</div>
@@ -43,6 +44,7 @@ export const Main = (props: Props) => {
       <div className="flex">
         <CardSection
           image={selectedCard?.image}
+          isLocation={selectedCard.type === "Location"}
           selectedDevTools={selectedDevTools}
           selectedOptions={selectedOptions}
         />

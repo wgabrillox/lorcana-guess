@@ -18,6 +18,8 @@ export const DevTools = (props: Props) => {
     "Item: Inkable",
     "Character: Uninkable",
     "Character: Inkable",
+    "Location: Uninkable",
+    "Location: Inkable",
   ];
   console.log("selectedDevTools", selectedDevTools);
   return (
@@ -39,25 +41,6 @@ export const DevTools = (props: Props) => {
         <div>
           <div className="font-bold pt-2">Card select:</div>
           <fieldset className="flex">
-            {/* <span className="font-bold">Action:</span>
-            <div className="px-2 ">
-              <input
-                type="radio"
-                name="card"
-                checked={selectedCardNumber === 0}
-                onChange={() => setSelectedDevTools({ selectedCardNumber: 0 })}
-              />
-              <label className="px-1">Uninkable</label>
-            </div>
-            <div>
-              <input
-                type="radio"
-                name="card"
-                checked={selectedCardNumber === 1}
-                onChange={() => setSelectedDevTools({ selectedCardNumber: 1 })}
-              />
-              <label className="px-1">Inkable</label>
-            </div> */}
             {mockData.map((item, idx) => (
               <div className="pr-2 ">
                 <input
