@@ -1,5 +1,12 @@
 export const AH = "";
 
+// Misc info
+// Name is The Bystander Collection Sans Medium
+// Subtitle is Brandon Text Condensed
+// Bold Types is Brandon Text Condensed Black Italic Keyword Ability name is Brandon Text Condensed Black
+// Keyword ability reminder text is Brandon Text Condensed Medium Italic
+// Flavor Text is Brandon Text Condensed Medium Italic
+
 export const mockData = [
   {
     artist: "Agnes Christianson",
@@ -35,6 +42,28 @@ export const mockData = [
     setId: "INK",
   },
   {
+    artist: "Cam Kendell",
+    setName: "Into the Inklands",
+    classifications: "Dreamborn, Hero",
+    abilities: "Bodyguard",
+    setNum: 3,
+    color: "Amber",
+    image:
+      "https://lorcana-api.com/images/baloo/von_bruinwald_xiii/baloo-von_bruinwald_xiii-large.png",
+    cost: 3,
+    inkable: false,
+    name: "Baloo - von Bruinwald XIII",
+    type: "Character",
+    lore: 1,
+    rarity: "Rare",
+    cardNum: 1,
+    bodyText:
+      "Bodyguard (This character may enter play exerted. An opposing character who challenges one of your characters must choose one with Bodyguard if able.)\n\nLet's Make Like A Tree - When this character is banished, gain 2 lore.",
+    willpower: 3,
+    strength: 0,
+    setId: "INK",
+  },
+  {
     artist: "Randy Bishop",
     setName: "The First Chapter",
     classifications: "Storyborn, Hero",
@@ -55,24 +84,24 @@ export const mockData = [
     strength: 2,
     setId: "TFC",
   },
-  {
-    artist: "Andreas Rocha",
-    setName: "Into the Inklands",
-    setNum: 3,
-    color: "Ruby",
-    image:
-      "https://lorcana-api.com/images/agrabah/marketplace/agrabah-marketplace-large.png",
-    cost: 3,
-    inkable: true,
-    name: "Agrabah - Marketplace",
-    moveCost: 1,
-    type: "Location",
-    lore: 2,
-    rarity: "Common",
-    flavorText:
-      '"Welcome to Agrabah, city of mystery, of enchantment, and the finest merchandise this side of the river."\n-Merchant',
-    cardNum: 134,
-    willpower: 5,
-    setId: "INK",
-  },
+  // {
+  //   artist: "Andreas Rocha",
+  //   setName: "Into the Inklands",
+  //   setNum: 3,
+  //   color: "Ruby",
+  //   image:
+  //     "https://lorcana-api.com/images/agrabah/marketplace/agrabah-marketplace-large.png",
+  //   cost: 3,
+  //   inkable: true,
+  //   name: "Agrabah - Marketplace",
+  //   moveCost: 1,
+  //   type: "Location",
+  //   lore: 2,
+  //   rarity: "Common",
+  //   flavorText:
+  //     '"Welcome to Agrabah, city of mystery, of enchantment, and the finest merchandise this side of the river."\n-Merchant',
+  //   cardNum: 134,
+  //   willpower: 5,
+  //   setId: "INK",
+  // },
 ];

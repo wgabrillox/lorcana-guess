@@ -1,5 +1,6 @@
 export interface Card {
   artist: string;
+  abilities?: string;
   setName: string;
   setNum: number;
   color: string;
@@ -9,7 +10,7 @@ export interface Card {
   name: string;
   type: string;
   rarity: string;
-  flavorText: string;
+  flavorText?: string;
   cardNum: number;
   bodyText?: string;
   willpower?: number;
