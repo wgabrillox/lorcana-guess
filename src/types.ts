@@ -21,3 +21,8 @@ export interface Card {
 export interface SelectedOptions {
   inkable: boolean;
 }
+
+export interface SelectedDevTools {
+  showEmptyPlaceholders: boolean;
+  selectedCardNumber: number;
+}

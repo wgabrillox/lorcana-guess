@@ -1,4 +1,3 @@
-import { boolean } from "yargs";
 import { Card, SelectedOptions } from "../types";
 
 type Props = {
