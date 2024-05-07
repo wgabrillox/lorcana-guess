@@ -8,10 +8,14 @@ export const AH = "";
 // Flavor Text is Brandon Text Condensed Medium Italic
 
 export const IMAGES = {
-  baseInkEmpty: "images/base-ink-empty.png",
-  inkableEmpty: "images/inkable-base-empty.png",
-  nonInkableEmpty: "images/noninkable-base-empty.png",
-  baseCard: "images/base-card.png",
+  baseInkEmpty:
+    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715095314/base-ink-empty.png",
+  inkableEmpty:
+    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715095314/inkable-empty.png",
+  nonInkableEmpty:
+    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715095314/non-inkable-empty.png",
+  baseCard:
+    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715095314/base-card.png",
 };
 
 export const mockData = [
