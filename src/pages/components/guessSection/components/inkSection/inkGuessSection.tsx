@@ -1,15 +1,27 @@
-import { Card, SelectedOptions } from "../types";
+import { Card, SelectedOptions } from "../../../../../types";
+import Select from "react-select";
 
 type Props = {
-  card: Card;
   selectedOptions: SelectedOptions;
-  setSelectedOptions: ({ keyName }: { [keyName: string]: boolean }) => void;
+  setSelectedOptions: ({
+    keyName,
+  }: {
+    [keyName: string]: boolean | number;
+  }) => void;
 };
 
-export const GuessSection = (props: Props) => {
-  const { card, selectedOptions, setSelectedOptions } = props;
+export const InkGuessSection = (props: Props) => {
+  const { selectedOptions, setSelectedOptions } = props;
+
+  const costOptions = Array(10)
+    .fill(0)
+    .map((_, i) => {
+      const val = i + 1;
+      return { value: val, label: val.toString() };
+    });
+
   return (
-    <div className="py-8">
+    <>
       <fieldset className="flex">
         <legend className="px-2 font-bold">Inkable</legend>
         <div className="px-2">
@@ -35,6 +47,14 @@ export const GuessSection = (props: Props) => {
           <label className="px-1">Non-Inkable</label>
         </div>
       </fieldset>
-    </div>
+      <div>
+        <legend className="p-2 font-bold">Card Cost:</legend>
+        <Select
+          options={costOptions}
+          className="px-2"
+          onChange={(option) => setSelectedOptions({ cost: option!.value })}
+        />
+      </div>
+    </>
   );
 };

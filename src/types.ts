@@ -1,4 +1,6 @@
 export interface Card {
+  [key: string]: string | number | boolean | undefined;
+
   artist: string;
   abilities?: string;
   setName: string;
@@ -20,7 +22,10 @@ export interface Card {
 }
 
 export interface SelectedOptions {
+  [key: string]: string | number | boolean | undefined;
+
   inkable: boolean;
+  cost: number;
 }
 
 export interface SelectedDevTools {

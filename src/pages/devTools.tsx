@@ -42,7 +42,7 @@ export const DevTools = (props: Props) => {
           <div className="font-bold pt-2">Card select:</div>
           <fieldset className="flex">
             {mockData.map((item, idx) => (
-              <div className="pr-2 ">
+              <div className="pr-2" key={idx}>
                 <input
                   type="radio"
                   name="card"

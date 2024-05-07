@@ -7,6 +7,13 @@ export const AH = "";
 // Keyword ability reminder text is Brandon Text Condensed Medium Italic
 // Flavor Text is Brandon Text Condensed Medium Italic
 
+export const IMAGES = {
+  baseInkEmpty: "images/base-ink-empty.png",
+  inkableEmpty: "images/inkable-base-empty.png",
+  nonInkableEmpty: "images/noninkable-base-empty.png",
+  baseCard: "images/base-card.png",
+};
+
 export const mockData = [
   {
     artist: "Agnes Christianson",

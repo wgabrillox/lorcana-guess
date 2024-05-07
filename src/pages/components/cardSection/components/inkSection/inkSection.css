@@ -7,7 +7,7 @@
 .noninkEmpty {
   position: absolute;
   top: 16px;
-  left: 17px;
+  left: 16px;
 }
 
 .inkEmpty {
@@ -16,6 +16,11 @@
   left: 5px;
 }
 
-.locationCard {
-  transform: rotate(90deg);
+.cardCost {
+  position: absolute;
+  width: 25px;
+  text-align: center;
+  z-index: 1;
+  top: 29px;
+  left: 25px;
 }
