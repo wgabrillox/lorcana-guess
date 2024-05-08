@@ -14,13 +14,14 @@
   position: absolute;
   top: 11px;
   left: 5px;
+  z-index: 1;
 }
 
 .cardCost {
   position: absolute;
   width: 25px;
   text-align: center;
-  z-index: 1;
-  top: 29px;
+  z-index: 2;
+  top: 28px;
   left: 25px;
 }

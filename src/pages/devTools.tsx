@@ -1,17 +1,9 @@
-import { SelectedDevTools } from "../types";
 import { mockData } from "../constants";
-type Props = {
-  selectedDevTools: SelectedDevTools;
-  setSelectedDevTools: ({
-    keyName,
-  }: {
-    [keyName: string]: boolean | number;
-  }) => void;
-};
+import { useOption, useOptionDispatch } from "./optionsContext";
 
-export const DevTools = (props: Props) => {
-  const { selectedDevTools, setSelectedDevTools } = props;
-  const { showEmptyPlaceholders, selectedCardNumber } = selectedDevTools;
+export const DevTools = () => {
+  const optionState = useOption()?.devToolOptionState;
+  const optionDispatch = useOptionDispatch();
 
   const cardLabels = [
     "Item: Uninkable",
@@ -21,7 +13,7 @@ export const DevTools = (props: Props) => {
     "Location: Uninkable",
     "Location: Inkable",
   ];
-  console.log("selectedDevTools", selectedDevTools);
+
   return (
     <div className="p-2">
       <div>
@@ -30,10 +22,13 @@ export const DevTools = (props: Props) => {
           <div className="font-bold pr-2">Show Placeholders:</div>
           <input
             type="checkbox"
-            checked={showEmptyPlaceholders}
+            checked={optionState?.showEmptyPlaceholders}
             onChange={() =>
-              setSelectedDevTools({
-                showEmptyPlaceholders: !showEmptyPlaceholders,
+              optionDispatch!({
+                type: "devTool",
+                action: {
+                  showEmptyPlaceholders: !optionState?.showEmptyPlaceholders,
+                },
               })
             }
           />
@@ -46,9 +41,12 @@ export const DevTools = (props: Props) => {
                 <input
                   type="radio"
                   name="card"
-                  checked={selectedCardNumber === idx}
+                  checked={optionState?.cardNumber === idx}
                   onChange={() =>
-                    setSelectedDevTools({ selectedCardNumber: idx })
+                    optionDispatch!({
+                      type: "devTool",
+                      action: { cardNumber: idx },
+                    })
                   }
                 />
                 <label className="px-1">{cardLabels[idx]}</label>

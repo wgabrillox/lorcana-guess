@@ -21,7 +21,7 @@ export interface Card {
   classifications?: string;
 }
 
-export interface SelectedOptions {
+export interface SelectedGuessOptions {
   [key: string]: string | number | boolean | undefined;
 
   inkable: boolean;
@@ -29,6 +29,29 @@ export interface SelectedOptions {
 }
 
 export interface SelectedDevTools {
+  [key: string]: string | number | boolean | undefined;
+
   showEmptyPlaceholders: boolean;
-  selectedCardNumber: number;
+  cardNumber: number;
 }
+
+export interface OptionState {
+  guessOptionState: SelectedGuessOptions;
+  devToolOptionState: SelectedDevTools;
+}
+
+type Guess = {
+  type: "guess";
+  action: {
+    [key: string]: boolean | number;
+  };
+};
+
+type DevTool = {
+  type: "devTool";
+  action: {
+    [key: string]: boolean | number;
+  };
+};
+
+export type OptionActions = Guess | DevTool;

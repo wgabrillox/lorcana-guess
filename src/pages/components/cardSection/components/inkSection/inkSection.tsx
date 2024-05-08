@@ -1,20 +1,19 @@
-import { SelectedOptions } from "../../../../../types";
 import { IMAGES } from "../../../../../constants";
+import { useOption } from "../../../../optionsContext";
 import "./inkSection.css";
 
 type Props = {
-  selectedOptions: SelectedOptions;
   isLocation: boolean;
 };
 
 export const InkSection = (props: Props) => {
-  const { selectedOptions, isLocation } = props;
-  const { inkable, cost } = selectedOptions;
+  const { isLocation } = props;
+  const { inkable, cost } = useOption()?.guessOptionState;
 
   return (
     <div>
       <div
-        className={`cardCost text-white font-bold ${
+        className={`cardCost text-white font-bold text-lg ${
           isLocation && "-rotate-90"
         }`}
       >

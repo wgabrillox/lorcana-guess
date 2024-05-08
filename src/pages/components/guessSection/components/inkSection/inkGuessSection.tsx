@@ -1,24 +1,18 @@
-import { Card, SelectedOptions } from "../../../../../types";
 import Select from "react-select";
+import { useOption, useOptionDispatch } from "../../../../optionsContext";
 
-type Props = {
-  selectedOptions: SelectedOptions;
-  setSelectedOptions: ({
-    keyName,
-  }: {
-    [keyName: string]: boolean | number;
-  }) => void;
-};
-
-export const InkGuessSection = (props: Props) => {
-  const { selectedOptions, setSelectedOptions } = props;
-
+export const InkGuessSection = () => {
   const costOptions = Array(10)
     .fill(0)
     .map((_, i) => {
       const val = i + 1;
       return { value: val, label: val.toString() };
     });
+
+  const optionState = useOption()?.guessOptionState;
+  const optionDispatch = useOptionDispatch();
+
+  console.log("ink guess section", optionState);
 
   return (
     <>
@@ -30,8 +24,10 @@ export const InkGuessSection = (props: Props) => {
             id="inkable"
             name="inkstatus"
             value="inkable"
-            checked={selectedOptions.inkable}
-            onChange={() => setSelectedOptions({ inkable: true })}
+            checked={optionState?.inkable}
+            onChange={() =>
+              optionDispatch!({ type: "guess", action: { inkable: true } })
+            }
           />
           <label className="px-1">Inkable</label>
         </div>
@@ -41,8 +37,10 @@ export const InkGuessSection = (props: Props) => {
             id="noninkable"
             name="inkstatus"
             value="noninkable"
-            checked={!selectedOptions.inkable}
-            onChange={() => setSelectedOptions({ inkable: false })}
+            checked={!optionState?.inkable}
+            onChange={() =>
+              optionDispatch!({ type: "guess", action: { inkable: false } })
+            }
           />
           <label className="px-1">Non-Inkable</label>
         </div>
@@ -52,7 +50,9 @@ export const InkGuessSection = (props: Props) => {
         <Select
           options={costOptions}
           className="px-2"
-          onChange={(option) => setSelectedOptions({ cost: option!.value })}
+          onChange={(option) =>
+            optionDispatch!({ type: "guess", action: { cost: option!.value } })
+          }
         />
       </div>
     </>

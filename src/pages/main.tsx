@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Card, SelectedOptions, SelectedDevTools } from "../types";
+import { Card } from "../types";
 import { CardSection } from "./components/cardSection/cardSection";
 import { GuessSection } from "./components/guessSection/guessSection";
 import { DevTools } from "./devTools";
+import { OptionsProvider, useOption } from "./optionsContext";
 
 type Props = {
   cards: Card[];
@@ -10,66 +11,41 @@ type Props = {
 
 export const Main = (props: Props) => {
   const { cards } = props;
-  const [selectedOptions, setSelectedOptions] = useState<SelectedOptions>({
-    inkable: true,
-    cost: 0,
-  });
+
   const [selectedCard, setSelectedCard] = useState<Card>(cards[0]);
-  const [selectedDevTools, setSelectedDevTools] = useState<SelectedDevTools>({
-    showEmptyPlaceholders: true,
-    selectedCardNumber: 0,
-  });
   const [correctCount, setCorrectCount] = useState<number | undefined>();
+  const optionState = useOption()?.guessOptionState;
 
-  const updateSelectedOptions = (updatedOption: {
-    [key: string]: boolean | number;
-  }) => {
-    setSelectedOptions({ ...selectedOptions, ...updatedOption });
-  };
-
-  const updateSelectedDevTools = (updatedOption: {
-    [key: string]: boolean | number;
-  }) => {
-    const [key, value] = Object.entries(updatedOption)[0];
-    if (key === "selectedCardNumber") {
-      setSelectedCard(cards[value as number]);
-    }
-    setSelectedDevTools({ ...selectedDevTools, ...updatedOption });
-  };
-  console.log("selectedCard", selectedCard);
+  console.log("ahh", useOption());
 
   const checkAnswers = () => {
     let correctCount = 0;
-    Object.keys(selectedOptions).forEach((option) => {
+    console.log("optionState", optionState);
+    Object.keys(optionState).forEach((option) => {
       console.log("option", option);
       console.log("actual", selectedCard[option]);
-      console.log("guess", selectedOptions[option]);
-      if (selectedCard[option] === selectedOptions[option]) correctCount += 1;
+      console.log("option", optionState);
+      console.log("guess", optionState[option]);
+      if (selectedCard[option] === optionState[option]) correctCount += 1;
     });
     setCorrectCount(correctCount);
   };
 
   return (
-    // <div>{cards && cards.map((card, idx) => <p key={idx}>{card.name}</p>)}</div>
-    <div>
-      <DevTools
-        selectedDevTools={selectedDevTools}
-        setSelectedDevTools={updateSelectedDevTools}
-      />
-      <div className="flex">
-        <CardSection
-          image={selectedCard?.image}
-          isLocation={selectedCard.type === "Location"}
-          selectedDevTools={selectedDevTools}
-          selectedOptions={selectedOptions}
-        />
-        <GuessSection
-          selectedOptions={selectedOptions}
-          setSelectedOptions={updateSelectedOptions}
-          checkAnswers={checkAnswers}
-          correctCount={correctCount}
-        />
-      </div>
-    </div>
+    <>
+      <OptionsProvider>
+        <DevTools />
+        <div className="flex">
+          <CardSection
+            image={selectedCard?.image}
+            isLocation={selectedCard.type === "Location"}
+          />
+          <GuessSection
+            checkAnswers={checkAnswers}
+            correctCount={correctCount}
+          />
+        </div>
+      </OptionsProvider>
+    </>
   );
 };

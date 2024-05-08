@@ -11,7 +11,7 @@ export const IMAGES = {
   baseInkEmpty:
     "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715095314/base-ink-empty.png",
   inkableEmpty:
-    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715095314/inkable-empty.png",
+    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715128575/inkable-empty_zvmzrs.png",
   nonInkableEmpty:
     "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715095314/non-inkable-empty.png",
   baseCard:
