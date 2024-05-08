@@ -7,6 +7,7 @@ type Props = {
 
 export const DevTools = (props: Props) => {
   const { setSelectedCard } = props;
+  const ahh = useOption();
   const optionState = useOption()?.devToolOptionState;
   const optionDispatch = useOptionDispatch();
 
@@ -48,6 +49,7 @@ export const DevTools = (props: Props) => {
                   name="card"
                   checked={optionState?.cardNumber === idx}
                   onChange={() => {
+                    console.log("ahh", ahh);
                     setSelectedCard(idx);
                     optionDispatch!({
                       type: "devTool",

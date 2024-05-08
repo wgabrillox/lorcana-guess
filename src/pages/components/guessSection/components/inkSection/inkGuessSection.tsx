@@ -1,14 +1,12 @@
 import Select from "react-select";
 import { useOption, useOptionDispatch } from "../../../../optionsContext";
+import { Option } from "../../../../../types";
+type Props = {
+  cost: Option[];
+};
 
-export const InkGuessSection = () => {
-  const costOptions = Array(10)
-    .fill(0)
-    .map((_, i) => {
-      const val = i + 1;
-      return { value: val, label: val.toString() };
-    });
-
+export const InkGuessSection = (props: Props) => {
+  const { cost } = props;
   const optionState = useOption()?.guessOptionState;
   const optionDispatch = useOptionDispatch();
 
@@ -46,7 +44,7 @@ export const InkGuessSection = () => {
       <div>
         <legend className="p-2 font-bold">Card Cost:</legend>
         <Select
-          options={costOptions}
+          options={cost}
           className="px-2"
           onChange={(option) =>
             optionDispatch!({ type: "guess", action: { cost: option!.value } })

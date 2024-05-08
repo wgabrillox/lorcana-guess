@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { InkGuessSection } from "./components/inkSection/inkGuessSection";
+import { CharStatGuessSection } from "./components/charStatSection/charStatGuessSection";
 import { useOption } from "../../optionsContext";
-import { Card } from "../../../types";
+import { Card, CardOptions } from "../../../types";
+
 type Props = {
   selectedCard: Card;
+  cardOptions: CardOptions;
 };
 
 export const GuessSection = (props: Props) => {
-  const { selectedCard } = props;
+  const { selectedCard, cardOptions } = props;
   const [correctCount, setCorrectCount] = useState<number>(0);
 
   const optionState = useOption()?.guessOptionState;
@@ -21,7 +24,8 @@ export const GuessSection = (props: Props) => {
 
   return (
     <div className="py-8 relative">
-      <InkGuessSection />
+      <InkGuessSection cost={cardOptions.cost} />
+      <CharStatGuessSection typeOptions={cardOptions.cardType} />
       <div className="absolute bottom-0">
         {correctCount !== undefined && (
           <div className="font-bold p-2">Correct Count: {correctCount}</div>

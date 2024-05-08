@@ -1,5 +1,6 @@
 import { IMAGES } from "../../../constants";
 import { InkSection } from "./components/inkSection/inkSection";
+import { CharStatSection } from "./components/charStatSection/charStatSection";
 import { useOption } from "../../optionsContext";
 
 type Props = {
@@ -18,6 +19,7 @@ export const CardSection = (props: Props) => {
             <div>
               <div>
                 <InkSection isLocation={isLocation} />
+                <CharStatSection isLocation={isLocation} />
               </div>
               <img src={IMAGES.baseCard} alt="base card" className="absolute" />
             </div>

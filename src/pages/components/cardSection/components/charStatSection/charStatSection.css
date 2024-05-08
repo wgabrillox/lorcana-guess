@@ -1,0 +1,13 @@
+.cardBanner {
+  position: absolute;
+  top: 261px;
+  left: 1px;
+  z-index: 2;
+}
+
+.charStats {
+  position: absolute;
+  top: 274px;
+  right: 17px;
+  z-index: 3;
+}

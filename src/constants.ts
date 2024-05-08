@@ -16,7 +16,18 @@ export const IMAGES = {
     "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715095314/non-inkable-empty.png",
   baseCard:
     "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715095314/base-card.png",
+  steelBanner:
+    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715196336/steel-banner_rkzfia.png",
+  steelCharStats:
+    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715197294/steelCharStats_qinmcw.png",
 };
+
+// export const CARD_TYPES = [
+//   {value: 'Character', label: 'Character'},
+//   {value: 'Character', label: 'Character'},
+//   {value: 'Character', label: 'Character'},
+//   {value: 'Character', label: 'Character'},
+// ]
 
 export const mockData = [
   {

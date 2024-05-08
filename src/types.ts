@@ -26,6 +26,7 @@ export interface SelectedGuessOptions {
 
   inkable: boolean;
   cost: number;
+  type: string;
 }
 
 export interface SelectedDevTools {
@@ -33,6 +34,18 @@ export interface SelectedDevTools {
 
   showEmptyPlaceholders: boolean;
   cardNumber: number;
+}
+
+export interface Option {
+  value: string | number;
+  label: string;
+}
+
+export interface CardOptions {
+  [key: string]: Option[];
+
+  cardType: Option[];
+  cost: Option[];
 }
 
 export interface OptionState {
@@ -43,7 +56,7 @@ export interface OptionState {
 type Guess = {
   type: "guess";
   action: {
-    [key: string]: boolean | number;
+    [key: string]: boolean | number | string;
   };
 };
 

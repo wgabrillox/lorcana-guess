@@ -5,6 +5,7 @@ const initialOptionData = {
   guessOptionState: {
     inkable: true,
     cost: 0,
+    type: "",
   },
   devToolOptionState: {
     showEmptyPlaceholders: true,
@@ -12,12 +13,20 @@ const initialOptionData = {
   },
 };
 
+type Props = {
+  children: React.ReactNode;
+};
+
 const OptionContext = createContext<OptionState>(initialOptionData);
 const OptionDispatchContext =
   createContext<React.Dispatch<OptionActions> | null>(null);
 
-export function OptionsProvider({ children }: any) {
+export function OptionsProvider(props: Props) {
+  const { children } = props;
+
   const [optionState, dispatch] = useReducer(optionsReducer, initialOptionData);
+
+  console.log("optionState", optionState);
 
   return (
     <OptionContext.Provider value={optionState}>
