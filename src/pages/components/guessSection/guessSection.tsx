@@ -1,12 +1,23 @@
+import { useState } from "react";
 import { InkGuessSection } from "./components/inkSection/inkGuessSection";
-
+import { useOption } from "../../optionsContext";
+import { Card } from "../../../types";
 type Props = {
-  checkAnswers: () => void;
-  correctCount: number | undefined;
+  selectedCard: Card;
 };
 
 export const GuessSection = (props: Props) => {
-  const { checkAnswers, correctCount } = props;
+  const { selectedCard } = props;
+  const [correctCount, setCorrectCount] = useState<number>(0);
+
+  const optionState = useOption()?.guessOptionState;
+
+  const checkAnswers = () => {
+    Object.keys(optionState).forEach((option) => {
+      if (selectedCard[option] === optionState[option])
+        setCorrectCount(correctCount + 1);
+    });
+  };
 
   return (
     <div className="py-8 relative">
