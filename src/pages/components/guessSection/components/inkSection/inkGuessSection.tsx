@@ -12,8 +12,6 @@ export const InkGuessSection = () => {
   const optionState = useOption()?.guessOptionState;
   const optionDispatch = useOptionDispatch();
 
-  console.log("ink guess section", optionState);
-
   return (
     <>
       <fieldset className="flex">

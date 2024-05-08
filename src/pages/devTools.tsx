@@ -1,7 +1,12 @@
 import { mockData } from "../constants";
 import { useOption, useOptionDispatch } from "./optionsContext";
 
-export const DevTools = () => {
+type Props = {
+  setSelectedCard: (num: number) => void;
+};
+
+export const DevTools = (props: Props) => {
+  const { setSelectedCard } = props;
   const optionState = useOption()?.devToolOptionState;
   const optionDispatch = useOptionDispatch();
 
@@ -42,12 +47,13 @@ export const DevTools = () => {
                   type="radio"
                   name="card"
                   checked={optionState?.cardNumber === idx}
-                  onChange={() =>
+                  onChange={() => {
+                    setSelectedCard(idx);
                     optionDispatch!({
                       type: "devTool",
                       action: { cardNumber: idx },
-                    })
-                  }
+                    });
+                  }}
                 />
                 <label className="px-1">{cardLabels[idx]}</label>
               </div>

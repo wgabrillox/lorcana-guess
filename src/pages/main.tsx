@@ -14,10 +14,14 @@ export const Main = (props: Props) => {
 
   const [selectedCard, setSelectedCard] = useState<Card>(cards[0]);
 
+  const updateSelectedCard = (num: number) => {
+    setSelectedCard(cards[num]);
+  };
+
   return (
     <>
       <OptionsProvider>
-        <DevTools />
+        <DevTools setSelectedCard={updateSelectedCard} />
         <div className="flex">
           <CardSection
             image={selectedCard?.image}
