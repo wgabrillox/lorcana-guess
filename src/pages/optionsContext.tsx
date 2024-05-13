@@ -6,6 +6,11 @@ const initialOptionData = {
     inkable: true,
     cost: 0,
     type: "",
+    strength: 0,
+    willpower: 0,
+    color: "Amber",
+    name: "",
+    bodyText: "",
   },
   devToolOptionState: {
     showEmptyPlaceholders: true,

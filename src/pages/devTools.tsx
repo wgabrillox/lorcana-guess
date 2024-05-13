@@ -12,12 +12,13 @@ export const DevTools = (props: Props) => {
   const optionDispatch = useOptionDispatch();
 
   const cardLabels = [
-    "Item: Uninkable",
-    "Item: Inkable",
-    "Character: Uninkable",
-    "Character: Inkable",
-    "Location: Uninkable",
-    "Location: Inkable",
+    "Action: Uninkable | Amber",
+    "Item: Inkable | Amythest",
+    "Song: Inkable | Ruby",
+    "Character: Uninkable | Steel",
+    "Character: Inkable | Sapphire",
+    // "Location: Uninkable | Ruby",
+    "Character: Inkable | Emerald",
   ];
 
   return (

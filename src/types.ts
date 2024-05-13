@@ -27,6 +27,11 @@ export interface SelectedGuessOptions {
   inkable: boolean;
   cost: number;
   type: string;
+  strength?: number;
+  willpower?: number;
+  color: string;
+  name: string;
+  bodyText: string;
 }
 
 export interface SelectedDevTools {
@@ -46,6 +51,11 @@ export interface CardOptions {
 
   cardType: Option[];
   cost: Option[];
+  strength: Option[];
+  willpower: Option[];
+  color: Option[];
+  name: Option[];
+  bodyText: Option[];
 }
 
 export interface OptionState {

@@ -13,7 +13,7 @@ export const InkSection = (props: Props) => {
   return (
     <div>
       <div
-        className={`cardCost text-white font-bold text-lg ${
+        className={`cardCost text-white font-bold text-2xl ${
           isLocation && "-rotate-90"
         }`}
       >

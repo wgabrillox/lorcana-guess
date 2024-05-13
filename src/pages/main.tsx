@@ -14,27 +14,48 @@ export const Main = (props: Props) => {
   const [cardOptions, setCardOptions] = useState<CardOptions>({
     cardType: [],
     cost: [],
+    strength: [],
+    willpower: [],
+    color: [],
+    name: [],
+    bodyText: [],
   });
 
   useEffect(() => {
+    const numberOptions = Array(10)
+      .fill(0)
+      .map((_, i) => {
+        const val = i + 1;
+        return { value: val, label: val.toString() };
+      });
     let cardTypes: string[] = [];
+    let colorTypes: string[] = [];
     const cardOptions = cards.reduce<CardOptions>(
       (acc, card) => {
-        const { type } = card;
+        const { type, color, name, bodyText } = card;
         if (!cardTypes.includes(type)) {
           cardTypes = [...cardTypes, type];
           acc["cardType"] = [...acc["cardType"], { value: type, label: type }];
         }
+
+        if (!colorTypes.includes(color)) {
+          colorTypes = [...colorTypes, color];
+          acc["color"] = [...acc["color"], { value: color, label: color }];
+        }
+        acc["name"] = [...acc["name"], { value: name, label: name }];
+        acc["bodyText"] = bodyText
+          ? [...acc["bodyText"], { value: bodyText, label: bodyText }]
+          : acc["bodyText"];
         return acc;
       },
       {
         cardType: [],
-        cost: Array(10)
-          .fill(0)
-          .map((_, i) => {
-            const val = i + 1;
-            return { value: val, label: val.toString() };
-          }),
+        cost: numberOptions,
+        strength: numberOptions,
+        willpower: numberOptions,
+        color: [],
+        name: [],
+        bodyText: [],
       }
     );
 
@@ -46,6 +67,8 @@ export const Main = (props: Props) => {
   const updateSelectedCard = (num: number) => {
     setSelectedCard(cards[num]);
   };
+
+  console.log("selectedCard", selectedCard);
 
   return (
     <>

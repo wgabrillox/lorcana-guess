@@ -1,13 +1,57 @@
 .cardBanner {
   position: absolute;
-  top: 261px;
+  top: 267px;
   left: 1px;
-  z-index: 2;
+  z-index: 4;
 }
 
 .charStats {
   position: absolute;
   top: 274px;
   right: 17px;
-  z-index: 3;
+  z-index: 4;
+}
+
+.strength {
+  position: absolute;
+  width: 30px;
+  text-align: center;
+  z-index: 4;
+  top: 286px;
+  right: 72px;
+}
+
+.willpower {
+  position: absolute;
+  width: 30px;
+  text-align: center;
+  z-index: 4;
+  top: 286px;
+  right: 27px;
+}
+
+.cardType {
+  position: absolute;
+  top: 61px;
+  color: white;
+}
+
+.cardTypeLabel {
+  width: 383px;
+}
+
+.charWrapper {
+  position: absolute;
+  top: 10px;
+  left: 23px;
+}
+
+.name {
+  position: absolute;
+  top: 10px;
+  /* left: 23px; */
+}
+
+.nameWrapper {
+  width: 383px;
 }
