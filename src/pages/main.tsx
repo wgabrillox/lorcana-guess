@@ -19,6 +19,7 @@ export const Main = (props: Props) => {
     color: [],
     name: [],
     bodyText: [],
+    lore: [],
   });
 
   useEffect(() => {
@@ -56,6 +57,12 @@ export const Main = (props: Props) => {
         color: [],
         name: [],
         bodyText: [],
+        lore: Array(4)
+          .fill(0)
+          .map((_, i) => {
+            const val = i + 1;
+            return { value: val, label: val.toString() };
+          }),
       }
     );
 

@@ -8,14 +8,19 @@ type Props = {
 
 export const DescriptionSection = (props: Props) => {
   const { isLocation } = props;
-  const { bodyText } = useOption()?.guessOptionState;
+  const { bodyText, type, lore } = useOption()?.guessOptionState;
 
+  const loreCount = lore ? `lore${lore}` : "";
+  console.log("loreCount", loreCount);
   return (
-    <div>
+    <div className="relative">
       <div className="descriptionBase">
         <img src={IMAGES.descriptionBase} alt="base description" />
-        <div className="absolute top-0 p-2">{bodyText}</div>
+        <div className="absolute top-0 p-2 descriptionText">{bodyText}</div>
       </div>
+      {type === "Character" && lore !== 0 && (
+        <img className="lore" src={IMAGES[loreCount]} alt="lore" />
+      )}
     </div>
   );
 };

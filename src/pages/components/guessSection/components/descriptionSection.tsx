@@ -1,6 +1,5 @@
 import Select from "react-select";
 import { useOption, useOptionDispatch } from "../../../optionsContext";
-import { Option } from "../../../../types";
 import { CardOptions } from "../../../../types";
 
 type Props = {
@@ -9,13 +8,26 @@ type Props = {
 
 export const DescriptionSection = (props: Props) => {
   const { cardOptions } = props;
-  const optionState = useOption()?.guessOptionState;
+  const { type } = useOption()?.guessOptionState;
   const optionDispatch = useOptionDispatch();
-
-  console.log("optionStateeeeee", optionState);
 
   return (
     <>
+      {type === "Character" && (
+        <div>
+          <legend className="p-2 font-bold">Lore:</legend>
+          <Select
+            options={cardOptions?.lore}
+            className="px-2"
+            onChange={(option) =>
+              optionDispatch!({
+                type: "guess",
+                action: { lore: option!.value },
+              })
+            }
+          />
+        </div>
+      )}
       <div>
         <legend className="p-2 font-bold">Description:</legend>
         <Select

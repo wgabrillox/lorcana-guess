@@ -10,6 +10,7 @@ export interface Card {
   cost: number;
   inkable: boolean;
   name: string;
+  lore?: number;
   type: string;
   rarity: string;
   flavorText?: string;
@@ -32,6 +33,7 @@ export interface SelectedGuessOptions {
   color: string;
   name: string;
   bodyText: string;
+  lore: number;
 }
 
 export interface SelectedDevTools {
@@ -56,6 +58,7 @@ export interface CardOptions {
   color: Option[];
   name: Option[];
   bodyText: Option[];
+  lore: Option[];
 }
 
 export interface OptionState {

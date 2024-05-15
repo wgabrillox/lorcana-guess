@@ -4,3 +4,14 @@
   z-index: 3;
   left: 15px;
 }
+
+.descriptionText {
+  margin-right: 30px;
+}
+
+.lore {
+  position: absolute;
+  top: 348px;
+  z-index: 3;
+  right: 17px;
+}

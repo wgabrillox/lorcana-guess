@@ -7,7 +7,11 @@ export const AH = "";
 // Keyword ability reminder text is Brandon Text Condensed Medium Italic
 // Flavor Text is Brandon Text Condensed Medium Italic
 
-export const IMAGES = {
+interface ImagesList {
+  [key: string]: string;
+}
+
+export const IMAGES: ImagesList = {
   baseInkEmpty:
     "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715095314/base-ink-empty.png",
   inkableEmpty:
@@ -42,6 +46,25 @@ export const IMAGES = {
     "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715309523/rubyCharStats_nwjyvq.png",
   descriptionBase:
     "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715368615/description-base_fwep0q.png",
+  lore1:
+    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715624093/lore1_h6ewf5.png",
+  lore2:
+    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715624093/lore2_snb2sj.png",
+  lore3:
+    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715624093/lore3_xu17jk.png",
+  lore4:
+    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715624093/lore4_heaxye.png",
+  steel:
+    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715788012/steel_c7zk4x.png",
+  emerald:
+    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715788012/emerald_wjjasb.png",
+  amber:
+    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715788012/amber_ovg06s.png",
+  amethyst:
+    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715788012/amethyst_gaokms.png",
+  sapphire:
+    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715788012/sapphire_c0wg4s.png",
+  ruby: "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715788012/ruby_zyi7cb.png",
 };
 
 // export const CARD_TYPES = [

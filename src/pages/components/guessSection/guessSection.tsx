@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { InkGuessSection } from "./components/inkSection/inkGuessSection";
-import { CharStatGuessSection } from "./components/charStatSection/charStatGuessSection";
 import { DescriptionSection } from "./components/descriptionSection";
 import { useOption } from "../../optionsContext";
 import { Card, CardOptions } from "../../../types";
-
+import { LeftColumn } from "./components/leftColumn";
+import { RightColumn } from "./components/rightColumn";
 type Props = {
   selectedCard: Card;
   cardOptions: CardOptions;
@@ -34,10 +33,14 @@ export const GuessSection = (props: Props) => {
 
   return (
     <div className="py-8 relative">
-      <InkGuessSection cost={cardOptions.cost} />
-      <CharStatGuessSection cardOptions={cardOptions} />
+      <div className="flex">
+        {/* <InkGuessSection cost={cardOptions.cost} /> */}
+        {/* <CharStatGuessSection cardOptions={cardOptions} /> */}
+        <LeftColumn cost={cardOptions.cost} cardOptions={cardOptions} />
+        <RightColumn cardOptions={cardOptions} />
+      </div>
       <DescriptionSection cardOptions={cardOptions} />
-      <div className="absolute bottom-0">
+      <div>
         {correctCount !== undefined && (
           <div className="font-bold p-2">
             Correct Count: {correctCount}/{cardKeys.length}
