@@ -11,7 +11,6 @@ export const DescriptionSection = (props: Props) => {
   const { bodyText, type, lore } = useOption()?.guessOptionState;
 
   const loreCount = lore ? `lore${lore}` : "";
-  console.log("loreCount", loreCount);
   return (
     <div className="relative">
       <div className="descriptionBase">

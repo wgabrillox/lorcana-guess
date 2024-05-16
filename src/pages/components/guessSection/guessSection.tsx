@@ -16,8 +16,6 @@ export const GuessSection = (props: Props) => {
   const optionState = useOption()?.guessOptionState;
   const cardKeys = Object.keys(selectedCard);
 
-  console.log("cardOptions", cardOptions);
-
   const checkAnswers = () => {
     let count = 0;
     cardKeys.forEach((option) => {
@@ -28,8 +26,6 @@ export const GuessSection = (props: Props) => {
     });
     setCorrectCount(count);
   };
-
-  console.log("correctCount", correctCount);
 
   return (
     <div className="py-8 relative">

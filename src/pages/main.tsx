@@ -75,8 +75,6 @@ export const Main = (props: Props) => {
     setSelectedCard(cards[num]);
   };
 
-  console.log("selectedCard", selectedCard);
-
   return (
     <>
       <OptionsProvider>

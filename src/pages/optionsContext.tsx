@@ -4,14 +4,14 @@ import { OptionState, OptionActions } from "../types";
 const initialOptionData = {
   guessOptionState: {
     inkable: true,
-    cost: 0,
+    cost: 1,
     type: "",
     strength: 0,
-    willpower: 0,
+    willpower: 1,
     color: "Amber",
     name: "",
     bodyText: "",
-    lore: 0,
+    lore: 1,
   },
   devToolOptionState: {
     showEmptyPlaceholders: true,
@@ -31,8 +31,6 @@ export function OptionsProvider(props: Props) {
   const { children } = props;
 
   const [optionState, dispatch] = useReducer(optionsReducer, initialOptionData);
-
-  console.log("optionState", optionState);
 
   return (
     <OptionContext.Provider value={optionState}>

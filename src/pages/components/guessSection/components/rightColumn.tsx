@@ -1,7 +1,9 @@
 import Select from "react-select";
-import { useOptionDispatch } from "../../../optionsContext";
+import { useOption, useOptionDispatch } from "../../../optionsContext";
 import { CardOptions, Option } from "../../../../types";
 import { TextField, Autocomplete } from "@mui/material";
+import { SliderComponent } from "./sliderComponent";
+
 type Props = {
   cardOptions: CardOptions;
 };
@@ -9,7 +11,10 @@ type Props = {
 export const RightColumn = (props: Props) => {
   const { cardOptions } = props;
 
+  const optionState = useOption()?.guessOptionState;
   const optionDispatch = useOptionDispatch();
+
+  const isCharSelected = optionState.type !== "Character";
 
   return (
     <div className="flex-1">
@@ -26,47 +31,9 @@ export const RightColumn = (props: Props) => {
           })
         }
       />
-      <div className="flex">
-        <div>
-          <legend className="font-bold">Strength:</legend>
-          <Select
-            options={cardOptions.strength}
-            className=""
-            onChange={(option) =>
-              optionDispatch!({
-                type: "guess",
-                action: { strength: option!.value },
-              })
-            }
-          />
-        </div>
-        <div>
-          <legend className="font-bold">Willpower:</legend>
-          <Select
-            options={cardOptions.willpower}
-            className=""
-            onChange={(option) =>
-              optionDispatch!({
-                type: "guess",
-                action: { willpower: option!.value },
-              })
-            }
-          />
-        </div>
-      </div>
-      <div>
-        <legend className="font-bold">Lore:</legend>
-        <Select
-          options={cardOptions?.lore}
-          className=""
-          onChange={(option) =>
-            optionDispatch!({
-              type: "guess",
-              action: { lore: option!.value },
-            })
-          }
-        />
-      </div>
+      <SliderComponent label="Strength" disabled={isCharSelected} />
+      <SliderComponent label="Willpower" disabled={isCharSelected} />
+      <SliderComponent label="Lore" max={4} disabled={isCharSelected} />
     </div>
   );
 };
