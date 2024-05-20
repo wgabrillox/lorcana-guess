@@ -1,4 +1,3 @@
-import Select from "react-select";
 import { useOption, useOptionDispatch } from "../../../optionsContext";
 import { CardOptions, Option } from "../../../../types";
 import { TextField, Autocomplete } from "@mui/material";

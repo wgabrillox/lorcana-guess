@@ -1,6 +1,7 @@
-import Select from "react-select";
-import { useOption, useOptionDispatch } from "../../../optionsContext";
+import { useOptionDispatch } from "../../../optionsContext";
 import { CardOptions } from "../../../../types";
+import { TextField, Autocomplete } from "@mui/material";
+import { Option } from "../../../../types";
 
 type Props = {
   cardOptions: CardOptions;
@@ -8,35 +9,22 @@ type Props = {
 
 export const DescriptionSection = (props: Props) => {
   const { cardOptions } = props;
-  const { type } = useOption()?.guessOptionState;
   const optionDispatch = useOptionDispatch();
 
   return (
     <>
-      {type === "Character" && (
-        <div>
-          <legend className="p-2 font-bold">Lore:</legend>
-          <Select
-            options={cardOptions?.lore}
-            className="px-2"
-            onChange={(option) =>
-              optionDispatch!({
-                type: "guess",
-                action: { lore: option!.value },
-              })
-            }
-          />
-        </div>
-      )}
       <div>
-        <legend className="p-2 font-bold">Description:</legend>
-        <Select
-          options={cardOptions?.bodyText}
-          className="px-2"
-          onChange={(option) =>
+        <Autocomplete
+          disablePortal
+          id="card-description"
+          options={cardOptions.bodyText}
+          renderInput={(params) => (
+            <TextField {...params} label="Description" />
+          )}
+          onChange={(event: any, newValue: Option | null) =>
             optionDispatch!({
               type: "guess",
-              action: { bodyText: option!.value },
+              action: { bodyText: newValue ? newValue.value : "" },
             })
           }
         />
