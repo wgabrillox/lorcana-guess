@@ -37,7 +37,7 @@ export const SliderComponent = (props: Props) => {
   }
 
   return (
-    <Box sx={{ width: 200 }} className="flex">
+    <Box sx={{ width: 200 }} className="flex my-1">
       <label
         className={`font-bold mr-5 leading-7 ${disabled && "text-zinc-600/50"}`}
       >

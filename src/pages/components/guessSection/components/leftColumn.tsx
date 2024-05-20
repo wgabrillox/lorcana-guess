@@ -51,19 +51,8 @@ export const LeftColumn = (props: Props) => {
             action: { name: newValue ? newValue.value : "" },
           })
         }
+        className="mb-2"
       />
-      <div>
-        <span className="font-bold">Inkable</span>
-        <Switch
-          defaultChecked
-          onChange={(event: any, newValue: boolean) =>
-            optionDispatch!({ type: "guess", action: { inkable: newValue } })
-          }
-        />
-      </div>
-      <div>
-        <SliderComponent label="Cost" />
-      </div>
       <div>
         <label className="font-bold">Color:</label>
         {cardOptions.color.map((color) => (
@@ -92,6 +81,20 @@ export const LeftColumn = (props: Props) => {
             }}
           />
         ))}
+      </div>
+      <div className="flex">
+        <div>
+          <label className="font-bold">Inkable:</label>
+          <Switch
+            defaultChecked
+            onChange={(event: any, newValue: boolean) =>
+              optionDispatch!({ type: "guess", action: { inkable: newValue } })
+            }
+          />
+        </div>
+        <div>
+          <SliderComponent label="Cost" />
+        </div>
       </div>
     </div>
   );
