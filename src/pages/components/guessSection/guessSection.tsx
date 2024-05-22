@@ -64,6 +64,9 @@ export const GuessSection = (props: Props) => {
   };
 
   const resetCardGuesses = () => {
+    randomCard();
+    setShowSelectNew(false);
+    setCorrectCount(null);
     optionDispatch!({
       type: "reset",
     });
@@ -129,13 +132,7 @@ export const GuessSection = (props: Props) => {
             )}
             {showSelectNew && (
               <div className="mt-2">
-                <Button
-                  variant="contained"
-                  onClick={() => {
-                    randomCard();
-                    resetCardGuesses();
-                  }}
-                >
+                <Button variant="contained" onClick={() => resetCardGuesses()}>
                   Change Card
                 </Button>
               </div>

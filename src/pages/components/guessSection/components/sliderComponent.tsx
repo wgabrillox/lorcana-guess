@@ -38,6 +38,8 @@ export const SliderComponent = (props: Props) => {
     );
   }
 
+  const selectedValue = optionState[label.toLowerCase()];
+
   return (
     <Box sx={{ width: 200 }} className="flex my-1">
       <FormLabel
@@ -61,6 +63,7 @@ export const SliderComponent = (props: Props) => {
         marks
         onChange={handleChange}
         slots={{ thumb: ThumbComponent }}
+        value={selectedValue as number}
         sx={{
           "& .MuiSlider-thumb": {
             height: 27,

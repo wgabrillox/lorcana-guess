@@ -12,7 +12,7 @@ type Props = {
 export const Main = (props: Props) => {
   const { cards } = props;
   const [cardOptions, setCardOptions] = useState<CardOptions>({
-    cardType: [],
+    type: [],
     cost: [],
     strength: [],
     willpower: [],
@@ -36,7 +36,7 @@ export const Main = (props: Props) => {
         const { type, color, name, bodyText } = card;
         if (!cardTypes.includes(type)) {
           cardTypes = [...cardTypes, type];
-          acc["cardType"] = [...acc["cardType"], { value: type, label: type }];
+          acc["type"] = [...acc["type"], { value: type, label: type }];
         }
 
         if (!colorTypes.includes(color)) {
@@ -50,7 +50,7 @@ export const Main = (props: Props) => {
         return acc;
       },
       {
-        cardType: [],
+        type: [],
         cost: numberOptions,
         strength: numberOptions,
         willpower: numberOptions,

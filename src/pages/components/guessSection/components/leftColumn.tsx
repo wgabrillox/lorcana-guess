@@ -1,19 +1,10 @@
 // import Select from "react-select";
 import { useOption, useOptionDispatch } from "../../../optionsContext";
 import { Option, CardOptions } from "../../../../types";
-import {
-  TextField,
-  Autocomplete,
-  Switch,
-  Radio,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  FormLabel,
-} from "@mui/material";
+import { Switch, Radio, FormControl, FormLabel } from "@mui/material";
 import { IMAGES } from "../../../../constants";
 import { SliderComponent } from "./sliderComponent";
+import { AutocompleteComponent } from "./autocompleteComponent";
 
 type Props = {
   cost: Option[];
@@ -54,25 +45,11 @@ export const LeftColumn = (props: Props) => {
 
   return (
     <div className="flex-column mr-4">
-      <Autocomplete
-        disablePortal
+      <AutocompleteComponent
+        label="Name"
         id="card-name"
-        options={cardOptions.name.sort()}
-        sx={{ width: 320 }}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Card Name"
-            error={incorrectState["name"] && devToolOptionState.showIncorrect}
-          />
-        )}
-        onChange={(event: any, newValue: Option | null) =>
-          optionDispatch!({
-            type: "guess",
-            action: { name: newValue ? newValue.value : "" },
-          })
-        }
-        className="mb-2"
+        cardOptions={cardOptions}
+        width={320}
       />
       <div>
         <FormControl>
@@ -122,7 +99,7 @@ export const LeftColumn = (props: Props) => {
           <div>
             <FormLabel sx={formLabelProps}>Inkable:</FormLabel>
             <Switch
-              defaultChecked
+              checked={optionState.inkable}
               onChange={(event: any, newValue: boolean) =>
                 optionDispatch!({
                   type: "guess",

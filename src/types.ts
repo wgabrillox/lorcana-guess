@@ -66,7 +66,7 @@ export interface Option {
 export interface CardOptions {
   [key: string]: Option[];
 
-  cardType: Option[];
+  type: Option[];
   cost: Option[];
   strength: Option[];
   willpower: Option[];
