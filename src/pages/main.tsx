@@ -13,22 +13,12 @@ export const Main = (props: Props) => {
   const { cards } = props;
   const [cardOptions, setCardOptions] = useState<CardOptions>({
     type: [],
-    cost: [],
-    strength: [],
-    willpower: [],
     color: [],
     name: [],
     bodyText: [],
-    lore: [],
   });
 
   useEffect(() => {
-    const numberOptions = Array(10)
-      .fill(0)
-      .map((_, i) => {
-        const val = i + 1;
-        return { value: val, label: val.toString() };
-      });
     let cardTypes: string[] = [];
     let colorTypes: string[] = [];
     const cardOptions = cards.reduce<CardOptions>(
@@ -51,18 +41,9 @@ export const Main = (props: Props) => {
       },
       {
         type: [],
-        cost: numberOptions,
-        strength: numberOptions,
-        willpower: numberOptions,
         color: [],
         name: [],
         bodyText: [],
-        lore: Array(4)
-          .fill(0)
-          .map((_, i) => {
-            const val = i + 1;
-            return { value: val, label: val.toString() };
-          }),
       }
     );
 

@@ -36,7 +36,19 @@ export const AutocompleteComponent = (props: Props) => {
     <Autocomplete
       disablePortal
       id={id}
-      options={cardOptions[optionKey]}
+      options={cardOptions[optionKey].sort((a, b) => {
+        const valueA = a.value.toUpperCase();
+        const valueB = b.value.toUpperCase();
+
+        if (valueA < valueB) {
+          return -1;
+        }
+        if (valueA > valueB) {
+          return 1;
+        }
+
+        return 0;
+      })}
       value={selectedValues[0] ? selectedValues[0] : null}
       sx={sxProp}
       renderInput={(params) => (

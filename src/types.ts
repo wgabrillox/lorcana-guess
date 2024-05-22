@@ -59,7 +59,7 @@ export interface IncorrectGuessOptions {
 }
 
 export interface Option {
-  value: string | number;
+  value: string;
   label: string;
 }
 
@@ -67,13 +67,9 @@ export interface CardOptions {
   [key: string]: Option[];
 
   type: Option[];
-  cost: Option[];
-  strength: Option[];
-  willpower: Option[];
   color: Option[];
   name: Option[];
   bodyText: Option[];
-  lore: Option[];
 }
 
 export interface OptionState {
