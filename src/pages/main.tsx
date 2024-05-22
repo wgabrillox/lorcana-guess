@@ -75,6 +75,11 @@ export const Main = (props: Props) => {
     setSelectedCard(cards[num]);
   };
 
+  const randomCard = () => {
+    const cardNum = Math.floor(Math.random() * cards.length);
+    setSelectedCard(cards[cardNum]);
+  };
+
   return (
     <>
       <OptionsProvider>
@@ -84,7 +89,11 @@ export const Main = (props: Props) => {
             image={selectedCard?.image}
             isLocation={selectedCard.type === "Location"}
           />
-          <GuessSection selectedCard={selectedCard} cardOptions={cardOptions} />
+          <GuessSection
+            selectedCard={selectedCard}
+            cardOptions={cardOptions}
+            randomCard={randomCard}
+          />
         </div>
       </OptionsProvider>
     </>

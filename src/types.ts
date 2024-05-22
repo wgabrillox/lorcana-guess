@@ -103,4 +103,8 @@ type IncorrectGuess = {
   };
 };
 
-export type OptionActions = Guess | DevTool | IncorrectGuess;
+type Reset = {
+  type: "reset";
+};
+
+export type OptionActions = Guess | DevTool | IncorrectGuess | Reset;

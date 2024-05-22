@@ -52,14 +52,11 @@ export const LeftColumn = (props: Props) => {
     name: "inkable-radio",
   });
 
-  console.log("incorrectState", incorrectState);
-
   return (
     <div className="flex-column mr-4">
       <Autocomplete
         disablePortal
         id="card-name"
-        // options={}
         options={cardOptions.name.sort()}
         sx={{ width: 320 }}
         renderInput={(params) => (
@@ -76,11 +73,6 @@ export const LeftColumn = (props: Props) => {
           })
         }
         className="mb-2"
-        filterOptions={(options, state) => {
-          console.log("options", options);
-          console.log("state", state);
-          return options;
-        }}
       />
       <div>
         <FormControl>

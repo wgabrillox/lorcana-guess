@@ -10,10 +10,11 @@ import Button from "@mui/material/Button";
 type Props = {
   selectedCard: Card;
   cardOptions: CardOptions;
+  randomCard: () => void;
 };
 
 export const GuessSection = (props: Props) => {
-  const { selectedCard, cardOptions } = props;
+  const { selectedCard, cardOptions, randomCard } = props;
   const cardKeys = genericAnswers.reduce(
     (acc, curr) =>
       selectedCard[curr] !== undefined
@@ -22,6 +23,7 @@ export const GuessSection = (props: Props) => {
     {}
   );
   const [correctCount, setCorrectCount] = useState<number | null>(null);
+  const [showSelectNew, setShowSelectNew] = useState<boolean>(false);
 
   const optionState = useOption()?.guessOptionState;
   const devToolState = useOption()?.devToolOptionState;
@@ -49,6 +51,22 @@ export const GuessSection = (props: Props) => {
       }
     });
     setCorrectCount(count);
+
+    if (count === Object.keys(cardKeys).length) {
+      optionDispatch!({
+        type: "devTool",
+        action: {
+          showEmptyPlaceholders: !devToolState.showEmptyPlaceholders,
+        },
+      });
+      setShowSelectNew(true);
+    }
+  };
+
+  const resetCardGuesses = () => {
+    optionDispatch!({
+      type: "reset",
+    });
   };
 
   return (
@@ -61,42 +79,67 @@ export const GuessSection = (props: Props) => {
         <DescriptionSection cardOptions={cardOptions} />
       </div>
       <div>
-        <Button variant="contained" onClick={() => checkAnswers()}>
+        <Button
+          variant="contained"
+          onClick={() => checkAnswers()}
+          disabled={showSelectNew}
+        >
           Submit
         </Button>
         {correctCount !== null && (
           <div>
-            <div className="font-bold my-2">
-              Correct Count: {correctCount}/{Object.keys(cardKeys).length}
-            </div>
-            <span className="mr-2">
-              <Button
-                variant="outlined"
-                onClick={() =>
-                  optionDispatch!({
-                    type: "devTool",
-                    action: {
-                      showIncorrect: !devToolState.showIncorrect,
-                    },
-                  })
-                }
-              >
-                {!devToolState.showIncorrect ? "Show" : "Hide"} Incorrect
-              </Button>
-            </span>
-            <Button
-              variant="outlined"
-              onClick={() =>
-                optionDispatch!({
-                  type: "devTool",
-                  action: {
-                    showEmptyPlaceholders: !devToolState.showEmptyPlaceholders,
-                  },
-                })
-              }
-            >
-              Show Card
-            </Button>
+            {!showSelectNew && (
+              <div>
+                <div className="font-bold my-2">
+                  Correct Count: {correctCount}/{Object.keys(cardKeys).length}
+                </div>
+                <span className="mr-2">
+                  <Button
+                    variant="outlined"
+                    onClick={() =>
+                      optionDispatch!({
+                        type: "devTool",
+                        action: {
+                          showIncorrect: !devToolState.showIncorrect,
+                        },
+                      })
+                    }
+                    disabled={showSelectNew}
+                  >
+                    {!devToolState.showIncorrect ? "Show" : "Hide"} Incorrect
+                  </Button>
+                </span>
+                <Button
+                  variant="outlined"
+                  onClick={() => {
+                    optionDispatch!({
+                      type: "devTool",
+                      action: {
+                        showEmptyPlaceholders:
+                          !devToolState.showEmptyPlaceholders,
+                      },
+                    });
+                    setShowSelectNew(true);
+                  }}
+                  disabled={showSelectNew}
+                >
+                  Show Card
+                </Button>
+              </div>
+            )}
+            {showSelectNew && (
+              <div className="mt-2">
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    randomCard();
+                    resetCardGuesses();
+                  }}
+                >
+                  Change Card
+                </Button>
+              </div>
+            )}
           </div>
         )}
       </div>

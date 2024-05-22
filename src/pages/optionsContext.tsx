@@ -87,6 +87,16 @@ function optionsReducer(state: OptionState, action: OptionActions) {
           ...action.action,
         },
       };
+    case "reset":
+      return {
+        ...state,
+        guessOptionState: {
+          ...initialOptionData.guessOptionState,
+        },
+        incorrectGuessState: {
+          ...initialOptionData.incorrectGuessState,
+        },
+      };
     default:
       return state;
   }
