@@ -1,11 +1,21 @@
-export const AH = "";
+export const genericAnswers = [
+  "bodyText",
+  "color",
+  "cost",
+  "inkable",
+  "name",
+  "type",
+  "lore",
+  "strength",
+  "willpower",
+];
 
-// Misc info
-// Name is The Bystander Collection Sans Medium
-// Subtitle is Brandon Text Condensed
-// Bold Types is Brandon Text Condensed Black Italic Keyword Ability name is Brandon Text Condensed Black
-// Keyword ability reminder text is Brandon Text Condensed Medium Italic
-// Flavor Text is Brandon Text Condensed Medium Italic
+export const cardAnswersHard = [
+  "setName",
+  "classifications",
+  "cardNum",
+  "rarity",
+];
 
 interface ImagesList {
   [key: string]: string;

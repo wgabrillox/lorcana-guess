@@ -1,6 +1,6 @@
 import { useOption, useOptionDispatch } from "../../../optionsContext";
 import { CardOptions, Option } from "../../../../types";
-import { TextField, Autocomplete } from "@mui/material";
+import { TextField, Autocomplete, FormControl } from "@mui/material";
 import { SliderComponent } from "./sliderComponent";
 
 type Props = {
@@ -12,6 +12,8 @@ export const RightColumn = (props: Props) => {
 
   const optionState = useOption()?.guessOptionState;
   const optionDispatch = useOptionDispatch();
+  const devToolOptionState = useOption()?.devToolOptionState;
+  const incorrectState = useOption()?.incorrectGuessState;
 
   const isCharSelected = optionState.type !== "Character";
 
@@ -22,7 +24,13 @@ export const RightColumn = (props: Props) => {
         id="card-name"
         options={cardOptions.cardType}
         sx={{ width: 200 }}
-        renderInput={(params) => <TextField {...params} label="Type" />}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Type"
+            error={incorrectState["type"] && devToolOptionState.showIncorrect}
+          />
+        )}
         onChange={(event: any, newValue: Option | null) =>
           optionDispatch!({
             type: "guess",

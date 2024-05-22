@@ -1,4 +1,4 @@
-import { useOptionDispatch } from "../../../optionsContext";
+import { useOption, useOptionDispatch } from "../../../optionsContext";
 import { CardOptions } from "../../../../types";
 import { TextField, Autocomplete } from "@mui/material";
 import { Option } from "../../../../types";
@@ -10,7 +10,8 @@ type Props = {
 export const DescriptionSection = (props: Props) => {
   const { cardOptions } = props;
   const optionDispatch = useOptionDispatch();
-
+  const devToolOptionState = useOption()?.devToolOptionState;
+  const incorrectState = useOption()?.incorrectGuessState;
   return (
     <>
       <div>
@@ -19,7 +20,13 @@ export const DescriptionSection = (props: Props) => {
           id="card-description"
           options={cardOptions.bodyText}
           renderInput={(params) => (
-            <TextField {...params} label="Description" />
+            <TextField
+              {...params}
+              label="Description"
+              error={
+                incorrectState["bodyText"] && devToolOptionState.showIncorrect
+              }
+            />
           )}
           onChange={(event: any, newValue: Option | null) =>
             optionDispatch!({

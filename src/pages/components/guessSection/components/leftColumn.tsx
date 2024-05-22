@@ -1,9 +1,17 @@
 // import Select from "react-select";
 import { useOption, useOptionDispatch } from "../../../optionsContext";
 import { Option, CardOptions } from "../../../../types";
-import { TextField, Autocomplete } from "@mui/material";
-import Switch from "@mui/material/Switch";
-import Radio from "@mui/material/Radio";
+import {
+  TextField,
+  Autocomplete,
+  Switch,
+  Radio,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormLabel,
+} from "@mui/material";
 import { IMAGES } from "../../../../constants";
 import { SliderComponent } from "./sliderComponent";
 
@@ -21,9 +29,16 @@ export const colorIconBackgroundColor: { [key: string]: string } = {
   emerald: "rgba(41, 138, 52, 0.3)",
 };
 
+export const formLabelProps = {
+  color: "text.primary",
+  fontWeight: "bold",
+};
+
 export const LeftColumn = (props: Props) => {
   const { cardOptions } = props;
   const optionState = useOption()?.guessOptionState;
+  const devToolOptionState = useOption()?.devToolOptionState;
+  const incorrectState = useOption()?.incorrectGuessState;
   const optionDispatch = useOptionDispatch();
 
   const controlProps = (option: Option) => ({
@@ -37,14 +52,23 @@ export const LeftColumn = (props: Props) => {
     name: "inkable-radio",
   });
 
+  console.log("incorrectState", incorrectState);
+
   return (
     <div className="flex-column mr-4">
       <Autocomplete
         disablePortal
         id="card-name"
-        options={cardOptions.name}
+        // options={}
+        options={cardOptions.name.sort()}
         sx={{ width: 320 }}
-        renderInput={(params) => <TextField {...params} label="Card Name" />}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Card Name"
+            error={incorrectState["name"] && devToolOptionState.showIncorrect}
+          />
+        )}
         onChange={(event: any, newValue: Option | null) =>
           optionDispatch!({
             type: "guess",
@@ -52,50 +76,74 @@ export const LeftColumn = (props: Props) => {
           })
         }
         className="mb-2"
+        filterOptions={(options, state) => {
+          console.log("options", options);
+          console.log("state", state);
+          return options;
+        }}
       />
       <div>
-        <label className="font-bold">Color:</label>
-        {cardOptions.color.map((color) => (
-          <Radio
-            {...controlProps(color)}
-            key={color.value}
-            checkedIcon={
-              <img
-                src={IMAGES[color.label.toLowerCase()]}
-                alt={`${color.label} icon`}
+        <FormControl>
+          <div>
+            <FormLabel
+              sx={formLabelProps}
+              error={
+                incorrectState["color"] && devToolOptionState.showIncorrect
+              }
+            >
+              Color:
+            </FormLabel>
+            {cardOptions.color.map((color) => (
+              <Radio
+                {...controlProps(color)}
+                key={color.value}
+                checkedIcon={
+                  <img
+                    src={IMAGES[color.label.toLowerCase()]}
+                    alt={`${color.label} icon`}
+                  />
+                }
+                icon={
+                  <img
+                    src={IMAGES[color.label.toLowerCase()]}
+                    alt={`${color.label} icon`}
+                  />
+                }
+                sx={{
+                  width: 45,
+                  height: 45,
+                  padding: 1,
+                  "&.Mui-checked": {
+                    bgcolor:
+                      colorIconBackgroundColor[color.label.toLowerCase()],
+                  },
+                }}
               />
-            }
-            icon={
-              <img
-                src={IMAGES[color.label.toLowerCase()]}
-                alt={`${color.label} icon`}
-              />
-            }
-            sx={{
-              width: 45,
-              height: 45,
-              padding: 1,
-              "&.Mui-checked": {
-                bgcolor: colorIconBackgroundColor[color.label.toLowerCase()],
-              },
-            }}
-          />
-        ))}
+            ))}
+          </div>
+        </FormControl>
       </div>
-      <div className="flex">
-        <div>
-          <label className="font-bold">Inkable:</label>
-          <Switch
-            defaultChecked
-            onChange={(event: any, newValue: boolean) =>
-              optionDispatch!({ type: "guess", action: { inkable: newValue } })
-            }
-          />
+      <FormControl
+        error={incorrectState["inkable"] && devToolOptionState.showIncorrect}
+      >
+        <div className="flex">
+          <div>
+            <FormLabel sx={formLabelProps}>Inkable:</FormLabel>
+            <Switch
+              defaultChecked
+              onChange={(event: any, newValue: boolean) =>
+                optionDispatch!({
+                  type: "guess",
+                  action: { inkable: newValue },
+                })
+              }
+            />
+          </div>
+          <div>
+            <SliderComponent label="Cost" />
+          </div>
         </div>
-        <div>
-          <SliderComponent label="Cost" />
-        </div>
-      </div>
+      </FormControl>
     </div>
   );
 };

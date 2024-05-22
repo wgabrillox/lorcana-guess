@@ -41,6 +41,21 @@ export interface SelectedDevTools {
 
   showEmptyPlaceholders: boolean;
   cardNumber: number;
+  showIncorrect: boolean;
+}
+
+export interface IncorrectGuessOptions {
+  [key: string]: boolean;
+
+  bodyText: boolean;
+  color: boolean;
+  cost: boolean;
+  inkable: boolean;
+  name: boolean;
+  type: boolean;
+  lore: boolean;
+  strength: boolean;
+  willpower: boolean;
 }
 
 export interface Option {
@@ -64,6 +79,7 @@ export interface CardOptions {
 export interface OptionState {
   guessOptionState: SelectedGuessOptions;
   devToolOptionState: SelectedDevTools;
+  incorrectGuessState: IncorrectGuessOptions;
 }
 
 type Guess = {
@@ -80,4 +96,11 @@ type DevTool = {
   };
 };
 
-export type OptionActions = Guess | DevTool;
+type IncorrectGuess = {
+  type: "incorrectGuess";
+  action: {
+    [key: string]: boolean;
+  };
+};
+
+export type OptionActions = Guess | DevTool | IncorrectGuess;

@@ -15,7 +15,19 @@ const initialOptionData = {
   },
   devToolOptionState: {
     showEmptyPlaceholders: true,
+    showIncorrect: false,
     cardNumber: 0,
+  },
+  incorrectGuessState: {
+    bodyText: false,
+    color: false,
+    cost: false,
+    inkable: false,
+    name: false,
+    type: false,
+    lore: false,
+    strength: false,
+    willpower: false,
   },
 };
 
@@ -64,6 +76,14 @@ function optionsReducer(state: OptionState, action: OptionActions) {
         ...state,
         devToolOptionState: {
           ...state.devToolOptionState,
+          ...action.action,
+        },
+      };
+    case "incorrectGuess":
+      return {
+        ...state,
+        incorrectGuessState: {
+          ...state.incorrectGuessState,
           ...action.action,
         },
       };

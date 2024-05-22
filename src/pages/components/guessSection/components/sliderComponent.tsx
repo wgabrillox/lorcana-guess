@@ -1,7 +1,7 @@
 import { Option, CardOptions } from "../../../../types";
 import { IMAGES } from "../../../../constants";
+import { Box, FormLabel } from "@mui/material";
 import Slider, { SliderThumb } from "@mui/material/Slider";
-import Box from "@mui/material/Box";
 import { useOption, useOptionDispatch } from "../../../optionsContext";
 
 type Props = {
@@ -15,6 +15,8 @@ interface ThumbComponentProps extends React.HTMLAttributes<unknown> {}
 export const SliderComponent = (props: Props) => {
   const { label, max, disabled } = props;
   const optionState = useOption()?.guessOptionState;
+  const devToolState = useOption()?.devToolOptionState;
+  const incorrectState = useOption()?.incorrectGuessState;
   const optionDispatch = useOptionDispatch();
 
   const handleChange = (event: Event, newValue: number | number[]) => {
@@ -38,11 +40,20 @@ export const SliderComponent = (props: Props) => {
 
   return (
     <Box sx={{ width: 200 }} className="flex my-1">
-      <label
-        className={`font-bold mr-5 leading-7 ${disabled && "text-zinc-600/50"}`}
+      <FormLabel
+        disabled={disabled}
+        sx={{
+          color: "text.primary",
+          fontWeight: "bold",
+          mr: "20px",
+          mt: "4px",
+        }}
+        error={
+          incorrectState[label.toLowerCase()] && devToolState.showIncorrect
+        }
       >
         {label}:
-      </label>
+      </FormLabel>
       <Slider
         min={1}
         max={max ? max : 10}
