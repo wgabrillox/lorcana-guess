@@ -6,6 +6,7 @@ import { useOption, useOptionDispatch } from "../../../optionsContext";
 
 type Props = {
   label: string;
+  min?: number;
   max?: number;
   disabled?: boolean;
 };
@@ -13,7 +14,7 @@ type Props = {
 interface ThumbComponentProps extends React.HTMLAttributes<unknown> {}
 
 export const SliderComponent = (props: Props) => {
-  const { label, max, disabled } = props;
+  const { label, min, max, disabled } = props;
   const optionState = useOption()?.guessOptionState;
   const devToolState = useOption()?.devToolOptionState;
   const incorrectState = useOption()?.incorrectGuessState;
@@ -57,9 +58,9 @@ export const SliderComponent = (props: Props) => {
         {label}:
       </FormLabel>
       <Slider
-        min={1}
+        min={min !== undefined ? min : 1}
         max={max ? max : 10}
-        defaultValue={1}
+        defaultValue={min !== undefined ? min : 1}
         marks
         onChange={handleChange}
         slots={{ thumb: ThumbComponent }}

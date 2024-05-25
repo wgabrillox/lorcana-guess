@@ -10,29 +10,39 @@ export const InkSection = (props: Props) => {
   const { isLocation } = props;
   const { inkable, cost } = useOption()?.guessOptionState;
 
+  const locationCheck = isLocation ? "locationBase" : "left-1.5";
+
   return (
-    <div>
+    <>
       <div
         className={`cardCost text-white font-bold text-2xl ${
-          isLocation && "-rotate-90"
+          isLocation ? "locationCost" : "baseCost"
         }`}
       >
         {cost}
       </div>
-      <div className="baseInkEmpty">
-        <img src={IMAGES.baseInkEmpty} alt="base ink" />
-      </div>
-      <div>
-        {inkable ? (
-          <div className="inkEmpty">
-            <img src={IMAGES.inkableEmpty} alt="emtpy ink" />
-          </div>
-        ) : (
-          <div className="noninkEmpty">
-            <img src={IMAGES.nonInkableEmpty} alt="emtpy unink" />
-          </div>
-        )}
-      </div>
-    </div>
+      <img
+        src={IMAGES.baseInkEmpty}
+        alt="base ink"
+        className={`absolute ${
+          isLocation ? "baseLocationEmpty" : "baseInkEmpty"
+        }`}
+      />
+      {inkable ? (
+        <img
+          src={IMAGES.inkableEmpty}
+          alt="emtpy ink"
+          className={`absolute ${isLocation ? "locationInkEmpty" : "inkEmpty"}`}
+        />
+      ) : (
+        <img
+          src={IMAGES.nonInkableEmpty}
+          alt="emtpy unink"
+          className={`absolute ${
+            isLocation ? "locationNoninkEmpty" : "noninkEmpty"
+          }`}
+        />
+      )}
+    </>
   );
 };

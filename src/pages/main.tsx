@@ -4,6 +4,7 @@ import { CardSection } from "./components/cardSection/cardSection";
 import { GuessSection } from "./components/guessSection/guessSection";
 import { DevTools } from "./devTools";
 import { OptionsProvider } from "./optionsContext";
+import "./main.css";
 
 type Props = {
   cards: Card[];
@@ -61,15 +62,19 @@ export const Main = (props: Props) => {
     setSelectedCard(cards[cardNum]);
   };
 
+  const isLocation = selectedCard.type === "Location";
+
   return (
     <>
       <OptionsProvider>
         <DevTools setSelectedCard={updateSelectedCard} />
-        <div className="flex">
-          <CardSection
-            image={selectedCard?.image}
-            isLocation={selectedCard.type === "Location"}
-          />
+        <div
+          // className={`flex my-0 mx-auto translate-y-1/4 ${
+          //   isLocation ? "w-5/6" : "w-3/4"
+          // }`}
+          className="flex mx-auto w-3/4 translate-y-1/4 border border-blue border-2"
+        >
+          <CardSection image={selectedCard?.image} isLocation={isLocation} />
           <GuessSection
             selectedCard={selectedCard}
             cardOptions={cardOptions}

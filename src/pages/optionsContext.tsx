@@ -11,7 +11,7 @@ const initialOptionData = {
     color: "Amber",
     name: "",
     bodyText: "",
-    lore: 1,
+    lore: 0,
   },
   devToolOptionState: {
     showEmptyPlaceholders: true,

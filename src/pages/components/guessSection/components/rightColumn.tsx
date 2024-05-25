@@ -19,11 +19,11 @@ export const RightColumn = (props: Props) => {
         label="Type"
         id="card-type"
         cardOptions={cardOptions}
-        width={320}
+        width={200}
       />
       <SliderComponent label="Strength" disabled={isCharSelected} />
       <SliderComponent label="Willpower" disabled={isCharSelected} />
-      <SliderComponent label="Lore" max={4} disabled={isCharSelected} />
+      <SliderComponent label="Lore" max={4} min={0} disabled={isCharSelected} />
     </div>
   );
 };

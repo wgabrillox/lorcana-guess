@@ -20,6 +20,8 @@ export interface Card {
   strength?: number;
   setId: string;
   classifications?: string;
+  uniqueId?: string;
+  franchise?: string;
 }
 
 export interface SelectedGuessOptions {

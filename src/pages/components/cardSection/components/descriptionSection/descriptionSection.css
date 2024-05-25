@@ -5,6 +5,12 @@
   left: 15px;
 }
 
+.locationBase {
+  position: absolute;
+  /* z-index: 3; */
+  top: 0px;
+}
+
 .descriptionText {
   margin-right: 30px;
 }

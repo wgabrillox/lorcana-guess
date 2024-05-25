@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Card } from "./types";
 import { Main } from "./pages/main";
-import { mockData } from "./constants";
+import { mockData, mockDataLocations } from "./constants";
 
 axios.interceptors.response.use(
   function (response) {
@@ -25,7 +25,8 @@ axios.interceptors.response.use(
 );
 
 export default function App() {
-  const [cards, setCards] = useState(mockData);
+  // const [cards, setCards] = useState(mockData);
+  const [cards, setCards] = useState(mockDataLocations);
 
   // useEffect(() => {
   //   // axios.get("https://api.lorcana-api.com/cards/all").then((res) => {

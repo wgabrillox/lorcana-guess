@@ -1,4 +1,4 @@
-import { mockData } from "../constants";
+import { mockData, mockDataLocations } from "../constants";
 import { useOption, useOptionDispatch } from "./optionsContext";
 
 type Props = {
@@ -10,14 +10,24 @@ export const DevTools = (props: Props) => {
   const optionState = useOption()?.devToolOptionState;
   const optionDispatch = useOptionDispatch();
 
+  // const cardLabels = [
+  //   "Action: Uninkable | Amber",
+  //   "Item: Inkable | Amythest",
+  //   "Song: Inkable | Ruby",
+  //   "Character: Uninkable | Steel",
+  //   "Character: Inkable | Sapphire",
+  //   "Character: Inkable | Emerald",
+  // ];
+
   const cardLabels = [
-    "Action: Uninkable | Amber",
-    "Item: Inkable | Amythest",
-    "Song: Inkable | Ruby",
-    "Character: Uninkable | Steel",
-    "Character: Inkable | Sapphire",
-    // "Location: Uninkable | Ruby",
-    "Character: Inkable | Emerald",
+    "Uninkable | Amber",
+    "Inkable | Ruby",
+    "Inkable | Amethyst",
+    "Inkable | Sapphire",
+    "Inkable | Emerald",
+    "Inkable | Steel",
+    "Action | Amber",
+    "Character | Steel",
   ];
 
   return (
@@ -42,7 +52,7 @@ export const DevTools = (props: Props) => {
         <div>
           <div className="font-bold pt-2">Card select:</div>
           <fieldset className="flex">
-            {mockData.map((item, idx) => (
+            {mockDataLocations.map((item, idx) => (
               <div className="pr-2" key={idx}>
                 <input
                   type="radio"

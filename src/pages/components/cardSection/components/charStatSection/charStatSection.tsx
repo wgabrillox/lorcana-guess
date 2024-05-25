@@ -15,27 +15,31 @@ export const CharStatSection = (props: Props) => {
 
   switch (color) {
     case "Steel":
-      colorBanner = IMAGES.steelBanner;
+      colorBanner = isLocation ? IMAGES.steelLocation : IMAGES.steelBanner;
       colorCharStats = IMAGES.steelCharStats;
       break;
     case "Amethyst":
-      colorBanner = IMAGES.amethystBanner;
+      colorBanner = isLocation
+        ? IMAGES.amethystLocation
+        : IMAGES.amethystBanner;
       colorCharStats = IMAGES.amethystCharStats;
       break;
     case "Amber":
-      colorBanner = IMAGES.amberBanner;
+      colorBanner = isLocation ? IMAGES.amberLocation : IMAGES.amberBanner;
       colorCharStats = IMAGES.amberCharStats;
       break;
     case "Sapphire":
-      colorBanner = IMAGES.sapphireBanner;
+      colorBanner = isLocation
+        ? IMAGES.sapphireLocation
+        : IMAGES.sapphireBanner;
       colorCharStats = IMAGES.sapphireCharStats;
       break;
     case "Emerald":
-      colorBanner = IMAGES.emeraldBanner;
+      colorBanner = isLocation ? IMAGES.emeraldLocation : IMAGES.emeraldBanner;
       colorCharStats = IMAGES.emeraldCharStats;
       break;
     case "Ruby":
-      colorBanner = IMAGES.rubyBanner;
+      colorBanner = isLocation ? IMAGES.rubyLocation : IMAGES.rubyBanner;
       colorCharStats = IMAGES.rubyCharStats;
       break;
     default:
@@ -46,14 +50,13 @@ export const CharStatSection = (props: Props) => {
   return (
     <div>
       {colorBanner && (
-        <div className="cardBanner">
+        <div className={`${isLocation ? "cardLocationBanner" : "cardBanner"}`}>
           <img src={colorBanner} alt="base banner" />
           <div className="name">
             <div
-              // className={`${
-              //   type === "Character" ? "charWrapper" : "nameWrapper"
-              // } flex-col text-white`}
-              className="nameWrapper font-bold text-white"
+              className={` font-bold text-white ${
+                isLocation ? "locationName" : "nameWrapper"
+              }`}
             >
               <div
                 className={`${
@@ -70,22 +73,28 @@ export const CharStatSection = (props: Props) => {
             </div>
           </div>
           <div className="cardType">
-            <div className="cardTypeLabel">
+            <div
+              className={`${
+                isLocation ? "locationTypeLabel" : "cardTypeLabel"
+              }`}
+            >
               <div className="mx-auto my-0 text-center">{type}</div>
             </div>
           </div>
         </div>
       )}
       {type === "Character" && colorBanner && (
-        <div className="relative ">
-          <div className="charStats">
+        <>
+          <div
+            className={`absolute ${isLocation ? "locationStats" : "charStats"}`}
+          >
             <img src={colorCharStats} alt="char stats" />
           </div>
           <div className="strength font-bold text-2xl ">{strength}</div>
           <div className="willpower text-white font-bold text-2xl ">
             {willpower}
           </div>
-        </div>
+        </>
       )}
     </div>
   );

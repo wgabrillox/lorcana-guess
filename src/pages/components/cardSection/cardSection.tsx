@@ -3,6 +3,7 @@ import { InkSection } from "./components/inkSection/inkSection";
 import { CharStatSection } from "./components/charStatSection/charStatSection";
 import { DescriptionSection } from "./components/descriptionSection/descriptionSection";
 import { useOption } from "../../optionsContext";
+import "./cardSection.css";
 
 type Props = {
   image: string;
@@ -13,21 +14,25 @@ export const CardSection = (props: Props) => {
   const { image, isLocation } = props;
   const { showEmptyPlaceholders } = useOption().devToolOptionState;
   return (
-    <div className="w-1/3">
-      <div className="w-96 h-1/2 mx-auto py-8">
-        <div className={`relative ${isLocation && "rotate-90"}`}>
-          {showEmptyPlaceholders && (
-            <div>
-              <div>
-                <InkSection isLocation={isLocation} />
-                <CharStatSection isLocation={isLocation} />
-                <DescriptionSection isLocation={isLocation} />
-              </div>
-              <img src={IMAGES.baseCard} alt="base card" className="absolute" />
-            </div>
-          )}
-
-          <img src={image} alt="card" />
+    <div className={`relative border mr-2 cardWrapper`}>
+      <img
+        src={image}
+        alt="card"
+        className={`card ${isLocation && "rotate-90"}`}
+      />
+      <div
+        className={`absolute top-0 ${
+          isLocation ? "locationBase" : "basicBase"
+        }`}
+      >
+        <div className={`relative ${!showEmptyPlaceholders && "invisible"}`}>
+          <InkSection isLocation={isLocation} />
+          <CharStatSection isLocation={isLocation} />
+          {/* <DescriptionSection isLocation={isLocation} /> */}
+          <img
+            src={isLocation ? IMAGES.baseLocation : IMAGES.baseCard}
+            alt="base card"
+          />
         </div>
       </div>
     </div>
