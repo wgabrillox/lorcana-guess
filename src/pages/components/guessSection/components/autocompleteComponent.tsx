@@ -1,4 +1,4 @@
-import { Option, CardOptions } from "../../../../types";
+import { Option, CardOptions, Card } from "../../../../types";
 import { useEffect, useMemo, useState } from "react";
 import { TextField, Autocomplete } from "@mui/material";
 import { useOption, useOptionDispatch } from "../../../optionsContext";
@@ -11,11 +11,20 @@ type Props = {
   width?: number;
   preselect?: string;
   disableOption?: boolean;
+  selectedCard?: Card;
 };
 
 export const AutocompleteComponent = (props: Props) => {
-  const { label, id, cardOptions, keyLabel, width, preselect, disableOption } =
-    props;
+  const {
+    label,
+    id,
+    cardOptions,
+    keyLabel,
+    width,
+    preselect,
+    disableOption,
+    selectedCard,
+  } = props;
   const optionState = useOption()?.guessOptionState;
   const devToolOptionState = useOption()?.devToolOptionState;
   const incorrectState = useOption()?.incorrectGuessState;
@@ -36,13 +45,14 @@ export const AutocompleteComponent = (props: Props) => {
     : {};
 
   useEffect(() => {
+    console.log("reached");
     if (preselect !== undefined) {
       optionDispatch!({
         type: "guess",
         action: { [optionKey]: preselect! },
       });
     }
-  }, [optionDispatch, optionKey, preselect]);
+  }, [optionDispatch, optionKey, preselect, selectedCard]);
 
   return (
     <Autocomplete

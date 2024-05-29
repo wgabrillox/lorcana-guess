@@ -26,6 +26,7 @@ axios.interceptors.response.use(
 
 export default function App() {
   // const [cards, setCards] = useState(mockData);
+  // const [cards, setCards] = useState(mockDataLocations);
   const [cards, setCards] = useState([...mockData, ...mockDataLocations]);
 
   // useEffect(() => {

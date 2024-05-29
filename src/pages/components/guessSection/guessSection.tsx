@@ -79,7 +79,11 @@ export const GuessSection = (props: Props) => {
       <div className="mb-2">
         <div className="flex">
           <LeftColumn cost={cardOptions.cost} cardOptions={cardOptions} />
-          <RightColumn cardOptions={cardOptions} isLocation={isLocation} />
+          <RightColumn
+            cardOptions={cardOptions}
+            isLocation={isLocation}
+            selectedCard={selectedCard}
+          />
         </div>
         <DescriptionSection cardOptions={cardOptions} />
       </div>

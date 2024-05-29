@@ -1,15 +1,16 @@
 import { useOption } from "../../../optionsContext";
-import { CardOptions } from "../../../../types";
+import { Card, CardOptions } from "../../../../types";
 import { SliderComponent } from "./sliderComponent";
 import { AutocompleteComponent } from "./autocompleteComponent";
 
 type Props = {
   cardOptions: CardOptions;
   isLocation: boolean;
+  selectedCard: Card;
 };
 
 export const RightColumn = (props: Props) => {
-  const { cardOptions, isLocation } = props;
+  const { cardOptions, isLocation, selectedCard } = props;
 
   const optionState = useOption()?.guessOptionState;
   const isCharSelected = optionState.type === "Character";
@@ -24,6 +25,7 @@ export const RightColumn = (props: Props) => {
         width={200}
         preselect={isLocation ? "Location" : undefined}
         disableOption={true}
+        selectedCard={selectedCard}
       />
       <SliderComponent label="Strength" disabled={!isCharSelected} />
       <SliderComponent
