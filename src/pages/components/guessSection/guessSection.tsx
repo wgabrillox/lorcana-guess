@@ -75,76 +75,81 @@ export const GuessSection = (props: Props) => {
   const isLocation = selectedCard.type === "Location";
 
   return (
-    <div className="py-8 relative">
-      <div className="mb-2">
-        <div className="flex">
-          <LeftColumn cost={cardOptions.cost} cardOptions={cardOptions} />
-          <RightColumn
-            cardOptions={cardOptions}
-            isLocation={isLocation}
-            selectedCard={selectedCard}
-          />
+    <div className="relative" style={{ width: "537px" }}>
+      <div className="xl:absolute m-auto inset-y-0 inset-x-0 h-fit py-2">
+        <div className="mb-2">
+          <div className="flex">
+            <LeftColumn cost={cardOptions.cost} cardOptions={cardOptions} />
+            <RightColumn
+              cardOptions={cardOptions}
+              isLocation={isLocation}
+              selectedCard={selectedCard}
+            />
+          </div>
+          <DescriptionSection cardOptions={cardOptions} />
         </div>
-        <DescriptionSection cardOptions={cardOptions} />
-      </div>
-      <div>
-        <Button
-          variant="contained"
-          onClick={() => checkAnswers()}
-          disabled={showSelectNew}
-        >
-          Submit
-        </Button>
-        {correctCount !== null && (
-          <div>
-            {!showSelectNew && (
-              <div>
-                <div className="font-bold my-2">
-                  Correct Count: {correctCount}/{Object.keys(cardKeys).length}
-                </div>
-                <span className="mr-2">
+        <div>
+          <Button
+            variant="contained"
+            onClick={() => checkAnswers()}
+            disabled={showSelectNew}
+          >
+            Submit
+          </Button>
+          {correctCount !== null && (
+            <div>
+              {!showSelectNew && (
+                <div>
+                  <div className="font-bold my-2">
+                    Correct Count: {correctCount}/{Object.keys(cardKeys).length}
+                  </div>
+                  <span className="mr-2">
+                    <Button
+                      variant="outlined"
+                      onClick={() =>
+                        optionDispatch!({
+                          type: "devTool",
+                          action: {
+                            showIncorrect: !devToolState.showIncorrect,
+                          },
+                        })
+                      }
+                      disabled={showSelectNew}
+                    >
+                      {!devToolState.showIncorrect ? "Show" : "Hide"} Incorrect
+                    </Button>
+                  </span>
                   <Button
                     variant="outlined"
-                    onClick={() =>
+                    onClick={() => {
                       optionDispatch!({
                         type: "devTool",
                         action: {
-                          showIncorrect: !devToolState.showIncorrect,
+                          showEmptyPlaceholders:
+                            !devToolState.showEmptyPlaceholders,
                         },
-                      })
-                    }
+                      });
+                      setShowSelectNew(true);
+                    }}
                     disabled={showSelectNew}
                   >
-                    {!devToolState.showIncorrect ? "Show" : "Hide"} Incorrect
+                    Show Card
                   </Button>
-                </span>
-                <Button
-                  variant="outlined"
-                  onClick={() => {
-                    optionDispatch!({
-                      type: "devTool",
-                      action: {
-                        showEmptyPlaceholders:
-                          !devToolState.showEmptyPlaceholders,
-                      },
-                    });
-                    setShowSelectNew(true);
-                  }}
-                  disabled={showSelectNew}
-                >
-                  Show Card
-                </Button>
-              </div>
-            )}
-            {showSelectNew && (
-              <div className="mt-2">
-                <Button variant="contained" onClick={() => resetCardGuesses()}>
-                  Change Card
-                </Button>
-              </div>
-            )}
-          </div>
-        )}
+                </div>
+              )}
+              {showSelectNew && (
+                <div className="mt-2">
+                  <Button
+                    variant="contained"
+                    onClick={() => resetCardGuesses()}
+                  >
+                    Change Card
+                  </Button>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

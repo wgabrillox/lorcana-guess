@@ -14,7 +14,7 @@ export const CardSection = (props: Props) => {
   const { image, isLocation } = props;
   const { showEmptyPlaceholders } = useOption().devToolOptionState;
   return (
-    <div className={`relative mr-2 cardWrapper`}>
+    <div className={`relative xl:mr-2 cardWrapper`}>
       <img
         src={image}
         alt="card"
