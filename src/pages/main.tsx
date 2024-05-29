@@ -51,7 +51,9 @@ export const Main = (props: Props) => {
     setCardOptions(cardOptions);
   }, [cards]);
 
-  const [selectedCard, setSelectedCard] = useState<Card>(cards[0]);
+  const [selectedCard, setSelectedCard] = useState<Card>(
+    cards[Math.floor(Math.random() * cards.length)]
+  );
 
   const updateSelectedCard = (num: number) => {
     setSelectedCard(cards[num]);
@@ -67,13 +69,8 @@ export const Main = (props: Props) => {
   return (
     <>
       <OptionsProvider>
-        <DevTools setSelectedCard={updateSelectedCard} />
-        <div
-          // className={`flex my-0 mx-auto translate-y-1/4 ${
-          //   isLocation ? "w-5/6" : "w-3/4"
-          // }`}
-          className="flex mx-auto w-3/4 translate-y-1/4 border border-blue border-2"
-        >
+        {/* <DevTools setSelectedCard={updateSelectedCard} /> */}
+        <div className="flex mx-auto w-3/4 translate-y-1/4">
           <CardSection image={selectedCard?.image} isLocation={isLocation} />
           <GuessSection
             selectedCard={selectedCard}

@@ -1,12 +1,10 @@
 .cardBanner {
-  position: absolute;
   top: 267px;
   left: 1px;
   z-index: 4;
 }
 
 .cardLocationBanner {
-  position: absolute;
   top: 171px;
   z-index: 4;
 }
@@ -39,6 +37,24 @@
   z-index: 4;
   top: 286px;
   right: 27px;
+}
+
+.locationMovecost {
+  position: absolute;
+  width: 30px;
+  text-align: center;
+  z-index: 4;
+  top: 187px;
+  left: 33px;
+}
+
+.locationWillpower {
+  position: absolute;
+  width: 30px;
+  text-align: center;
+  z-index: 4;
+  top: 187px;
+  right: 32px;
 }
 
 .cardType {

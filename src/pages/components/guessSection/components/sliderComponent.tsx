@@ -9,21 +9,25 @@ type Props = {
   min?: number;
   max?: number;
   disabled?: boolean;
+  keyLabel?: string;
+  width?: string;
 };
 
 interface ThumbComponentProps extends React.HTMLAttributes<unknown> {}
 
 export const SliderComponent = (props: Props) => {
-  const { label, min, max, disabled } = props;
+  const { label, min, max, disabled, keyLabel, width } = props;
   const optionState = useOption()?.guessOptionState;
   const devToolState = useOption()?.devToolOptionState;
   const incorrectState = useOption()?.incorrectGuessState;
   const optionDispatch = useOptionDispatch();
 
+  const optionKey = keyLabel ? keyLabel : label.toLowerCase();
+
   const handleChange = (event: Event, newValue: number | number[]) => {
     optionDispatch!({
       type: "guess",
-      action: { [label.toLowerCase()]: newValue as number },
+      action: { [optionKey]: newValue as number },
     });
   };
 
@@ -33,7 +37,7 @@ export const SliderComponent = (props: Props) => {
       <SliderThumb {...other}>
         {children}
         <span className="font-bold text-lorcana-gold">
-          {optionState[label.toLowerCase()]}
+          {optionState[optionKey]}
         </span>
       </SliderThumb>
     );
@@ -50,10 +54,9 @@ export const SliderComponent = (props: Props) => {
           fontWeight: "bold",
           mr: "20px",
           mt: "4px",
+          width: `${width ? width : "default"}`,
         }}
-        error={
-          incorrectState[label.toLowerCase()] && devToolState.showIncorrect
-        }
+        error={incorrectState[optionKey] && devToolState.showIncorrect}
       >
         {label}:
       </FormLabel>

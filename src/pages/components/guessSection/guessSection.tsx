@@ -72,12 +72,14 @@ export const GuessSection = (props: Props) => {
     });
   };
 
+  const isLocation = selectedCard.type === "Location";
+
   return (
     <div className="py-8 relative">
       <div className="mb-2">
         <div className="flex">
           <LeftColumn cost={cardOptions.cost} cardOptions={cardOptions} />
-          <RightColumn cardOptions={cardOptions} />
+          <RightColumn cardOptions={cardOptions} isLocation={isLocation} />
         </div>
         <DescriptionSection cardOptions={cardOptions} />
       </div>

@@ -1,5 +1,5 @@
 import { Option, CardOptions } from "../../../../types";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { TextField, Autocomplete } from "@mui/material";
 import { useOption, useOptionDispatch } from "../../../optionsContext";
 
@@ -9,10 +9,13 @@ type Props = {
   cardOptions: CardOptions;
   keyLabel?: string;
   width?: number;
+  preselect?: string;
+  disableOption?: boolean;
 };
 
 export const AutocompleteComponent = (props: Props) => {
-  const { label, id, cardOptions, keyLabel, width } = props;
+  const { label, id, cardOptions, keyLabel, width, preselect, disableOption } =
+    props;
   const optionState = useOption()?.guessOptionState;
   const devToolOptionState = useOption()?.devToolOptionState;
   const incorrectState = useOption()?.incorrectGuessState;
@@ -32,6 +35,15 @@ export const AutocompleteComponent = (props: Props) => {
       }
     : {};
 
+  useEffect(() => {
+    if (preselect !== undefined) {
+      optionDispatch!({
+        type: "guess",
+        action: { [optionKey]: preselect! },
+      });
+    }
+  }, [optionDispatch, optionKey, preselect]);
+
   return (
     <Autocomplete
       disablePortal
@@ -49,7 +61,11 @@ export const AutocompleteComponent = (props: Props) => {
 
         return 0;
       })}
-      value={selectedValues[0] ? selectedValues[0] : null}
+      getOptionDisabled={(option) =>
+        disableOption!! && option.value === "Location"
+      }
+      disabled={preselect !== undefined}
+      value={selectedValues.length ? selectedValues[0] : null}
       sx={sxProp}
       renderInput={(params) => (
         <TextField

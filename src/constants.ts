@@ -91,6 +91,10 @@ export const IMAGES: ImagesList = {
     "https://res.cloudinary.com/dhtbrbpni/image/upload/v1716591724/sapphireLocation_p3q2bk.png",
   steelLocation:
     "https://res.cloudinary.com/dhtbrbpni/image/upload/v1716592401/steelLocation_xlvamk.png",
+  locationLore1:
+    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1716936698/locationLore1_zmymaj.png",
+  locationLore2:
+    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1716936698/locationLore2_qnnlu6.png",
 };
 
 // export const CARD_TYPES = [

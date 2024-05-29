@@ -12,6 +12,7 @@ const initialOptionData = {
     name: "",
     bodyText: "",
     lore: 0,
+    moveCost: 1,
   },
   devToolOptionState: {
     showEmptyPlaceholders: true,
@@ -28,6 +29,7 @@ const initialOptionData = {
     lore: false,
     strength: false,
     willpower: false,
+    moveCost: false,
   },
 };
 

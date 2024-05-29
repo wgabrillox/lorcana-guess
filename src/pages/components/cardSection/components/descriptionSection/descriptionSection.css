@@ -1,23 +1,36 @@
 .descriptionBase {
-  position: absolute;
   top: 346px;
   z-index: 3;
   left: 15px;
 }
 
-.locationBase {
-  position: absolute;
-  /* z-index: 3; */
-  top: 0px;
+.descriptionLocation {
+  top: 253px;
+  z-index: 3;
 }
 
 .descriptionText {
+  padding-left: 6px;
   margin-right: 30px;
+  margin-top: 5px;
+}
+
+.locationText {
+  padding-left: 18px;
+  margin-right: 50px;
+  margin-top: 5px;
 }
 
 .lore {
   position: absolute;
   top: 348px;
+  z-index: 3;
+  right: 17px;
+}
+
+.locationLore {
+  position: absolute;
+  top: 253px;
   z-index: 3;
   right: 17px;
 }

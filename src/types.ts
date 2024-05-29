@@ -22,6 +22,7 @@ export interface Card {
   classifications?: string;
   uniqueId?: string;
   franchise?: string;
+  moveCost?: number;
 }
 
 export interface SelectedGuessOptions {
@@ -36,6 +37,7 @@ export interface SelectedGuessOptions {
   name: string;
   bodyText: string;
   lore: number;
+  moveCost: number;
 }
 
 export interface SelectedDevTools {
@@ -58,6 +60,7 @@ export interface IncorrectGuessOptions {
   lore: boolean;
   strength: boolean;
   willpower: boolean;
+  moveCost: boolean;
 }
 
 export interface Option {

@@ -8,7 +8,7 @@ type Props = {
 
 export const CharStatSection = (props: Props) => {
   const { isLocation } = props;
-  const { type, strength, willpower, color, name } =
+  const { type, strength, willpower, color, name, moveCost } =
     useOption()?.guessOptionState;
   let colorBanner,
     colorCharStats = "";
@@ -50,7 +50,11 @@ export const CharStatSection = (props: Props) => {
   return (
     <div>
       {colorBanner && (
-        <div className={`${isLocation ? "cardLocationBanner" : "cardBanner"}`}>
+        <div
+          className={`absolute ${
+            isLocation ? "cardLocationBanner" : "cardBanner"
+          }`}
+        >
           <img src={colorBanner} alt="base banner" />
           <div className="name">
             <div
@@ -83,11 +87,9 @@ export const CharStatSection = (props: Props) => {
           </div>
         </div>
       )}
-      {type === "Character" && colorBanner && (
+      {type === "Character" && (
         <>
-          <div
-            className={`absolute ${isLocation ? "locationStats" : "charStats"}`}
-          >
+          <div className="absolute charStats">
             <img src={colorCharStats} alt="char stats" />
           </div>
           <div className="strength font-bold text-2xl ">{strength}</div>
@@ -95,6 +97,16 @@ export const CharStatSection = (props: Props) => {
             {willpower}
           </div>
         </>
+      )}
+      {type === "Location" && (
+        <div className="locationStats">
+          <div className="locationMovecost text-white font-bold text-2xl ">
+            {moveCost}
+          </div>
+          <div className="locationWillpower text-white font-bold text-2xl ">
+            {willpower}
+          </div>
+        </div>
       )}
     </div>
   );

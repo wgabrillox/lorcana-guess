@@ -64,6 +64,9 @@ export const DevTools = (props: Props) => {
                       type: "devTool",
                       action: { cardNumber: idx },
                     });
+                    optionDispatch!({
+                      type: "reset",
+                    });
                   }}
                 />
                 <label className="px-1">{cardLabels[idx]}</label>
