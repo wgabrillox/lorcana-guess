@@ -1,8 +1,6 @@
-import { Option, CardOptions } from "../../../../types";
-import { IMAGES } from "../../../../constants";
 import { Box, FormLabel } from "@mui/material";
-import Slider, { SliderThumb } from "@mui/material/Slider";
 import { useOption, useOptionDispatch } from "../../../optionsContext";
+import Slider from "./slider";
 
 type Props = {
   label: string;
@@ -12,8 +10,6 @@ type Props = {
   keyLabel?: string;
   width?: string;
 };
-
-interface ThumbComponentProps extends React.HTMLAttributes<unknown> {}
 
 export const SliderComponent = (props: Props) => {
   const { label, min, max, disabled, keyLabel, width } = props;
@@ -31,19 +27,13 @@ export const SliderComponent = (props: Props) => {
     });
   };
 
-  function ThumbComponent(props: ThumbComponentProps) {
-    const { children, ...other } = props;
-    return (
-      <SliderThumb {...other}>
-        {children}
-        <span className="font-bold text-lorcana-gold">
-          {optionState[optionKey]}
-        </span>
-      </SliderThumb>
-    );
-  }
+  const selectedValue = optionState[optionKey];
 
-  const selectedValue = optionState[label.toLowerCase()];
+  const markMax = max ? max - 1 : 9;
+  const marks = Array.from({ length: markMax - 1 }, (_, i) => ({
+    value: i + 1 + 1,
+    label: "",
+  }));
 
   return (
     <Box sx={{ width: 200 }} className="flex my-1">
@@ -53,7 +43,6 @@ export const SliderComponent = (props: Props) => {
           color: "text.primary",
           fontWeight: "bold",
           mr: "20px",
-          mt: "4px",
           width: `${width ? width : "default"}`,
         }}
         error={incorrectState[optionKey] && devToolState.showIncorrect}
@@ -64,24 +53,9 @@ export const SliderComponent = (props: Props) => {
         min={min !== undefined ? min : 1}
         max={max ? max : 10}
         defaultValue={min !== undefined ? min : 1}
-        marks
+        marks={marks.length ? marks : [{ value: 1, label: "" }]}
         onChange={handleChange}
-        slots={{ thumb: ThumbComponent }}
         value={selectedValue as number}
-        sx={{
-          "& .MuiSlider-thumb": {
-            height: 27,
-            width: 27,
-            backgroundColor: `${disabled ? "#696969" : "#000"}`,
-            border: "2px solid #b39961",
-            "&:hover": {
-              boxShadow: "0 0 0 8px rgba(58, 133, 137, 0.16)",
-            },
-          },
-          "& .MuiSlider-rail": {
-            color: "#000",
-          },
-        }}
         disabled={disabled}
       />
     </Box>

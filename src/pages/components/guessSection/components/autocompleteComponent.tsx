@@ -45,7 +45,6 @@ export const AutocompleteComponent = (props: Props) => {
     : {};
 
   useEffect(() => {
-    console.log("reached");
     if (preselect !== undefined) {
       optionDispatch!({
         type: "guess",
