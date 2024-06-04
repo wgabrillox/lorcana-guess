@@ -76,7 +76,7 @@ export const GuessSection = (props: Props) => {
 
   return (
     <div className="relative" style={{ width: "537px" }}>
-      <div className="xl:absolute m-auto inset-y-0 inset-x-0 h-fit py-2">
+      <div className="xl:absolute m-auto inset-y-0 inset-x-0 h-fit p-2">
         <div className="mb-2">
           <div className="flex">
             <LeftColumn cost={cardOptions.cost} cardOptions={cardOptions} />

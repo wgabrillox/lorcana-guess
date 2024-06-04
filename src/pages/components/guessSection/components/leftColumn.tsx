@@ -44,7 +44,7 @@ export const LeftColumn = (props: Props) => {
   });
 
   return (
-    <div className="flex-column mr-4">
+    <div className="flex-column mr-2">
       <AutocompleteComponent
         label="Name"
         id="card-name"

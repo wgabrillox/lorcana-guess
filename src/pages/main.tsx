@@ -69,7 +69,7 @@ export const Main = (props: Props) => {
   return (
     <>
       <OptionsProvider>
-        {/* <DevTools setSelectedCard={updateSelectedCard} /> */}
+        <DevTools setSelectedCard={updateSelectedCard} />
         <div className="flex mx-auto w-fit flex-col xl:flex-row translate-y-1/4">
           <CardSection image={selectedCard?.image} isLocation={isLocation} />
           <GuessSection

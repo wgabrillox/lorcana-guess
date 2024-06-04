@@ -12,14 +12,12 @@ export const DescriptionSection = (props: Props) => {
   const { cardOptions } = props;
   return (
     <>
-      <div>
-        <AutocompleteComponent
-          label="Description"
-          id="card-description"
-          keyLabel="bodyText"
-          cardOptions={cardOptions}
-        />
-      </div>
+      <AutocompleteComponent
+        label="Description"
+        id="card-description"
+        keyLabel="bodyText"
+        cardOptions={cardOptions}
+      />
     </>
   );
 };
