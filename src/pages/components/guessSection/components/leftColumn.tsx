@@ -81,7 +81,7 @@ export const LeftColumn = (props: Props) => {
                 sx={{
                   width: 45,
                   height: 45,
-                  padding: 1,
+                  // padding: 1,
                   "&.Mui-checked": {
                     bgcolor:
                       colorIconBackgroundColor[color.label.toLowerCase()],
@@ -108,9 +108,7 @@ export const LeftColumn = (props: Props) => {
               }
             />
           </div>
-          <div>
-            <SliderComponent label="Cost" />
-          </div>
+          <SliderComponent label="Cost" />
         </div>
       </FormControl>
     </div>

@@ -6,6 +6,7 @@ import { LeftColumn } from "./components/leftColumn";
 import { RightColumn } from "./components/rightColumn";
 import { genericAnswers } from "../../../constants";
 import Button from "@mui/material/Button";
+import "./guessSection.css";
 
 type Props = {
   selectedCard: Card;
@@ -75,7 +76,7 @@ export const GuessSection = (props: Props) => {
   const isLocation = selectedCard.type === "Location";
 
   return (
-    <div className="relative" style={{ width: "537px" }}>
+    <div className="guessWrapper relative ">
       <div className="xl:absolute m-auto inset-y-0 inset-x-0 h-fit p-2">
         <div className="mb-2">
           <div className="flex">

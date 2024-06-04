@@ -1,0 +1,13 @@
+.guessWrapper {
+  width: 537px;
+  background-color: white;
+}
+
+@media (max-width: 540px) {
+  .guessWrapper {
+    width: 100%;
+    position: sticky;
+    bottom: 0px;
+    border-top: 1px solid gray;
+  }
+}

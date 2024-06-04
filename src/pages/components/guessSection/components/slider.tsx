@@ -50,7 +50,7 @@ const Slider = React.forwardRef(function Slider(
           className: "bg-black h-2 absolute rounded-full",
         },
         mark: {
-          className: "bg-slate-500 w-0.5 h-2 absolute",
+          className: "bg-slate-500 w-0.5 h- 2absolute",
         },
       }}
     />
