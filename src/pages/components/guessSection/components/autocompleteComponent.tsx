@@ -90,12 +90,13 @@ export const AutocompleteComponent = (props: Props) => {
           error={incorrectState[optionKey] && devToolOptionState.showIncorrect}
         />
       )}
-      onChange={(event: any, newValue: Option | null) =>
+      onChange={(event: any, newValue: Option | null) => {
         optionDispatch!({
           type: "guess",
           action: { [optionKey]: newValue ? newValue.value : "" },
-        })
-      }
+        });
+        event.target.blur();
+      }}
       className="mb-2"
     />
   );
