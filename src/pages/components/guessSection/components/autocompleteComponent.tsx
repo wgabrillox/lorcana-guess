@@ -12,6 +12,7 @@ type Props = {
   preselect?: string;
   disableOption?: boolean;
   selectedCard?: Card;
+  isShowingCard: boolean;
 };
 
 export const AutocompleteComponent = (props: Props) => {
@@ -24,6 +25,7 @@ export const AutocompleteComponent = (props: Props) => {
     preselect,
     disableOption,
     selectedCard,
+    isShowingCard,
   } = props;
   const optionState = useOption()?.guessOptionState;
   const devToolOptionState = useOption()?.devToolOptionState;
@@ -80,7 +82,7 @@ export const AutocompleteComponent = (props: Props) => {
       getOptionDisabled={(option) =>
         disableOption!! && option.value === "Location"
       }
-      disabled={preselect !== undefined}
+      disabled={preselect !== undefined || isShowingCard}
       value={selectedValues.length ? selectedValues[0] : null}
       sx={sxProp}
       renderInput={(params) => (

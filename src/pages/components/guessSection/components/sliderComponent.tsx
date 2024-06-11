@@ -10,10 +10,12 @@ type Props = {
   keyLabel?: string;
   labelWidth?: string;
   width?: number | { [key: string]: number };
+  isShowingCard: boolean;
 };
 
 export const SliderComponent = (props: Props) => {
-  const { label, min, max, disabled, keyLabel, labelWidth } = props;
+  const { label, min, max, disabled, keyLabel, labelWidth, isShowingCard } =
+    props;
   const optionState = useOption()?.guessOptionState;
   const devToolState = useOption()?.devToolOptionState;
   const incorrectState = useOption()?.incorrectGuessState;
@@ -60,7 +62,7 @@ export const SliderComponent = (props: Props) => {
         marks={marks.length ? marks : [{ value: 1, label: "" }]}
         onChange={handleChange}
         value={selectedValue as number}
-        disabled={disabled}
+        disabled={disabled || isShowingCard}
       />
     </Box>
   );

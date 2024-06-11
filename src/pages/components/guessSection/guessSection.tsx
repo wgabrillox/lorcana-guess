@@ -113,6 +113,7 @@ export const GuessSection = (props: Props) => {
                 id="card-name"
                 cardOptions={cardOptions}
                 width={{ xs: 1, sm: 1, md: 312 }}
+                isShowingCard={showSelectNew}
               />
               <AutocompleteComponent
                 label="Type"
@@ -122,6 +123,7 @@ export const GuessSection = (props: Props) => {
                 preselect={isLocation ? "Location" : undefined}
                 disableOption={true}
                 selectedCard={selectedCard}
+                isShowingCard={showSelectNew}
               />
             </div>
             <div className="flex flex-col md:flex-row flex-1 md:space-x-2">
@@ -165,6 +167,7 @@ export const GuessSection = (props: Props) => {
                                 ],
                             },
                           }}
+                          disabled={showSelectNew}
                         />
                       ))}
                     </div>
@@ -192,6 +195,7 @@ export const GuessSection = (props: Props) => {
                             })
                           }
                           size="small"
+                          disabled={showSelectNew}
                         />
                       </Box>
                     </div>
@@ -200,6 +204,7 @@ export const GuessSection = (props: Props) => {
                     <SliderComponent
                       label="Cost"
                       width={{ xs: 168, sm: 200, md: 200 }}
+                      isShowingCard={showSelectNew}
                     />
                   </div>
                 </div>
@@ -210,12 +215,14 @@ export const GuessSection = (props: Props) => {
                   <SliderComponent
                     label="Strength"
                     disabled={!isCharSelected}
+                    isShowingCard={showSelectNew}
                   />
                 </div>
                 <div className="flex-1 content-center">
                   <SliderComponent
                     label="Willpower"
                     disabled={!isCharSelected && !isLocSelected}
+                    isShowingCard={showSelectNew}
                   />
                 </div>
               </div>
@@ -230,6 +237,7 @@ export const GuessSection = (props: Props) => {
                       max={isCharSelected ? 4 : 2}
                       min={0}
                       disabled={!isCharSelected && !isLocSelected}
+                      isShowingCard={showSelectNew}
                     />
                   </div>
                   <div className="flex-1 md:pl-1 py-1">
@@ -239,6 +247,7 @@ export const GuessSection = (props: Props) => {
                       max={3}
                       disabled={!isLocSelected}
                       labelWidth={"171px"}
+                      isShowingCard={showSelectNew}
                     />
                   </div>
                 </div>
@@ -252,6 +261,7 @@ export const GuessSection = (props: Props) => {
             keyLabel="bodyText"
             cardOptions={cardOptions}
             width={1}
+            isShowingCard={showSelectNew}
           />
         </div>
         <div className="flex flex-col md:flex-row">
