@@ -25,15 +25,15 @@ axios.interceptors.response.use(
 );
 
 export default function App() {
-  // const [cards, setCards] = useState(mockData);
+  const [cards, setCards] = useState();
   // const [cards, setCards] = useState(mockDataLocations);
-  const [cards, setCards] = useState([...mockData, ...mockDataLocations]);
+  // const [cards, setCards] = useState([...mockData, ...mockDataLocations]);
 
-  // useEffect(() => {
-  //   // axios.get("https://api.lorcana-api.com/cards/all").then((res) => {
-  //   //   setCards(res.data);
-  //   // });
-  //   setCards([mock]);
-  // }, []);
-  return <Main cards={cards} />;
+  useEffect(() => {
+    axios.get("https://api.lorcana-api.com/cards/all").then((res) => {
+      setCards(res.data);
+    });
+    // setCards([mock]);
+  }, []);
+  return cards ? <Main cards={cards} /> : <div />;
 }

@@ -8,6 +8,7 @@ export const genericAnswers = [
   "lore",
   "strength",
   "willpower",
+  "moveCost",
 ];
 
 export const cardAnswersHard = [

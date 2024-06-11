@@ -15,3 +15,45 @@
 .basicBase {
   transform: translateX(19%);
 }
+
+@media (max-width: 640px) {
+  /* .cardWrapper {
+    width: 528px;
+  }
+
+  .card {
+    height: 535px;
+    width: 385px;
+    margin: 0px auto;
+  } */
+
+  .cardWrapper {
+    width: 375px;
+  }
+
+  .card {
+    height: 370px;
+    width: 266px;
+    margin: 0px auto;
+  }
+
+  .locationCard {
+    width: 370px;
+    height: 275px;
+  }
+
+  .outlineCard {
+    width: 265px;
+    left: 4px;
+  }
+
+  .outlineLocationCard {
+    width: 370px;
+    left: -2px;
+    height: 266px;
+  }
+
+  .locationBase {
+    transform: translateY(18%);
+  }
+}

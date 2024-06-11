@@ -8,11 +8,12 @@ type Props = {
   max?: number;
   disabled?: boolean;
   keyLabel?: string;
-  width?: string;
+  labelWidth?: string;
+  width?: number | { [key: string]: number };
 };
 
 export const SliderComponent = (props: Props) => {
-  const { label, min, max, disabled, keyLabel, width } = props;
+  const { label, min, max, disabled, keyLabel, labelWidth } = props;
   const optionState = useOption()?.guessOptionState;
   const devToolState = useOption()?.devToolOptionState;
   const incorrectState = useOption()?.incorrectGuessState;
@@ -36,14 +37,17 @@ export const SliderComponent = (props: Props) => {
   }));
 
   return (
-    <Box sx={{ width: 200 }} className="flex my-1">
+    <Box className="flex">
       <FormLabel
         disabled={disabled}
         sx={{
           color: "text.primary",
           fontWeight: "bold",
           mr: "20px",
-          width: `${width ? width : "default"}`,
+          width: {
+            sm: "default",
+            md: `${labelWidth ? labelWidth : "default"}`,
+          },
         }}
         error={incorrectState[optionKey] && devToolState.showIncorrect}
       >

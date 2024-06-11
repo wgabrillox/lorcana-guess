@@ -10,12 +10,6 @@ export const DescriptionSection = (props: Props) => {
   const { isLocation } = props;
   const { bodyText, type, lore } = useOption()?.guessOptionState;
 
-  // const loreCount = if (isLocation) {
-  //   lore ? `locationLore${lore}` : ""
-  // } else {
-  //   lore ? `lore${lore}` : "";
-  // }
-
   const loreCount = lore
     ? isLocation
       ? `locationLore${lore}`
@@ -36,7 +30,7 @@ export const DescriptionSection = (props: Props) => {
           alt="base description"
         />
         <div
-          className={`absolute top-0 ${
+          className={`absolute top-0 text-xs md:text-base ${
             isLocation ? "locationText" : "descriptionText"
           }`}
         >

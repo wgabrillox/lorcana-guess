@@ -14,7 +14,7 @@ export const CardSection = (props: Props) => {
   const { image, isLocation } = props;
   const { showEmptyPlaceholders } = useOption().devToolOptionState;
   return (
-    <div className={`relative xl:mr-2 cardWrapper`}>
+    <div className={`relative lg:mr-2 cardWrapper mx-auto`}>
       <img
         src={image}
         alt="card"
@@ -25,7 +25,11 @@ export const CardSection = (props: Props) => {
           isLocation ? "locationBase" : "basicBase"
         }`}
       >
-        <div className={`relative ${!showEmptyPlaceholders && "invisible"}`}>
+        <div
+          className={`relative ${!showEmptyPlaceholders && "invisible"} ${
+            isLocation ? "outlineLocationCard" : "outlineCard"
+          }`}
+        >
           <InkSection isLocation={isLocation} />
           <CharStatSection isLocation={isLocation} />
           <DescriptionSection isLocation={isLocation} />

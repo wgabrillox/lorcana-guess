@@ -8,7 +8,7 @@ type Props = {
   id: string;
   cardOptions: CardOptions;
   keyLabel?: string;
-  width?: number;
+  width?: number | { [key: string]: number };
   preselect?: string;
   disableOption?: boolean;
   selectedCard?: Card;
@@ -40,7 +40,7 @@ export const AutocompleteComponent = (props: Props) => {
 
   const sxProp = width
     ? {
-        width: { width },
+        width: width,
       }
     : {};
 

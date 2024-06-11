@@ -53,13 +53,13 @@
   width: 30px;
   text-align: center;
   z-index: 4;
-  top: 190px;
-  right: 32px;
+  top: 188px;
+  right: 31px;
 }
 
 .cardType {
   position: absolute;
-  top: 61px;
+  top: 58px;
   color: white;
 }
 
@@ -88,4 +88,94 @@
 
 .locationTypeLabel {
   width: 533px;
+}
+
+@media (max-width: 640px) {
+  .cardBanner {
+    top: 185px;
+    left: 1px;
+    z-index: 4;
+  }
+
+  .cardType {
+    position: absolute;
+    top: 38px;
+    color: white;
+  }
+
+  .cardTypeLabel {
+    width: 265px;
+  }
+
+  .charStats {
+    width: 75px;
+    height: 43px;
+    top: 188px;
+    right: 13px;
+    z-index: 4;
+  }
+
+  .strength {
+    position: absolute;
+    width: 30px;
+    text-align: center;
+    z-index: 4;
+    top: 197px;
+    right: 50px;
+  }
+
+  .willpower {
+    position: absolute;
+    width: 30px;
+    text-align: center;
+    z-index: 4;
+    top: 196px;
+    right: 16px;
+  }
+
+  .name {
+    position: absolute;
+    top: 4px;
+  }
+
+  .nameWrapper {
+    width: 265px;
+  }
+
+  .cardLocationBanner {
+    top: 118px;
+    z-index: 4;
+  }
+
+  .locationMovecost {
+    position: absolute;
+    width: 30px;
+    text-align: center;
+    z-index: 4;
+    top: 129px;
+    left: 19px;
+  }
+
+  .locationWillpower {
+    position: absolute;
+    width: 30px;
+    text-align: center;
+    z-index: 4;
+    top: 129px;
+    right: 17px;
+  }
+
+  .name {
+    position: absolute;
+    top: 8px;
+  }
+
+  .locationName {
+    width: 370px;
+  }
+
+  .locationTypeLabel {
+    width: 370px;
+    margin-top: 2px;
+  }
 }

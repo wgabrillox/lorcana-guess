@@ -58,18 +58,20 @@ export const CharStatSection = (props: Props) => {
           <img src={colorBanner} alt="base banner" />
           <div className="name">
             <div
-              className={` font-bold text-white ${
+              className={`font-bold text-white ${
                 isLocation ? "locationName" : "nameWrapper"
               }`}
             >
               <div
                 className={`${
                   type === "Character"
-                    ? "ml-5 mt-1"
-                    : `text-center ${splitName.length === 2 ? "mt-2" : "mt-4"}`
+                    ? "ml-3.5 md:ml-5 mt-1"
+                    : `text-center ${
+                        splitName.length === 2 ? "md:mt-2" : "sm: mt-2 md:mt-4"
+                      }`
                 }`}
               >
-                <div className="font-bold text-xl">
+                <div className="font-bold text-sm sm:text-xl">
                   {splitName[0].toUpperCase()}
                 </div>
                 <div className="subName font-bold text-xs">{splitName[1]}</div>
@@ -82,7 +84,9 @@ export const CharStatSection = (props: Props) => {
                 isLocation ? "locationTypeLabel" : "cardTypeLabel"
               }`}
             >
-              <div className="mx-auto my-0 text-center">{type}</div>
+              <div className="mx-auto my-0 text-center text-sm md:text-base">
+                {type}
+              </div>
             </div>
           </div>
         </div>
@@ -92,18 +96,20 @@ export const CharStatSection = (props: Props) => {
           <div className="absolute charStats">
             <img src={colorCharStats} alt="char stats" />
           </div>
-          <div className="strength font-bold text-2xl ">{strength}</div>
-          <div className="willpower text-white font-bold text-2xl ">
+          <div className="strength font-bold text-lg md:text-2xl ">
+            {strength}
+          </div>
+          <div className="willpower text-white font-bold text-lg md:text-2xl ">
             {willpower}
           </div>
         </>
       )}
       {type === "Location" && (
         <div className="locationStats">
-          <div className="locationMovecost text-white font-bold text-2xl ">
+          <div className="locationMovecost text-base text-white font-bold sm:text-2xl ">
             {moveCost}
           </div>
-          <div className="locationWillpower text-white font-bold text-2xl ">
+          <div className="locationWillpower text-base text-white font-bold sm:text-2xl ">
             {willpower}
           </div>
         </div>

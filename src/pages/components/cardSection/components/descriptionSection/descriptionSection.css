@@ -34,3 +34,39 @@
   z-index: 3;
   right: 17px;
 }
+
+@media (max-width: 640px) {
+  .descriptionBase {
+    top: 240px;
+    z-index: 3;
+    left: 12px;
+    width: 242px;
+  }
+
+  .descriptionText {
+    padding-left: 4px;
+    margin-right: 30px;
+    margin-top: 6px;
+  }
+
+  .lore {
+    position: absolute;
+    top: 241px;
+    z-index: 3;
+    right: 11px;
+    height: 96px;
+  }
+
+  .descriptionLocation {
+    top: 175px;
+    z-index: 3;
+  }
+
+  .locationLore {
+    position: absolute;
+    top: 162px;
+    z-index: 3;
+    right: 4px;
+    transform: scale(0.7);
+  }
+}

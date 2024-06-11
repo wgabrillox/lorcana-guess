@@ -98,6 +98,7 @@ function optionsReducer(state: OptionState, action: OptionActions) {
         devToolOptionState: {
           ...state.devToolOptionState,
           showEmptyPlaceholders: true,
+          showIncorrect: false,
         },
         incorrectGuessState: {
           ...initialOptionData.incorrectGuessState,

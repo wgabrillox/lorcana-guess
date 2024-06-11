@@ -3,7 +3,7 @@
   background-color: white;
 }
 
-@media (max-width: 540px) {
+@media (max-width: 640px) {
   .guessWrapper {
     width: 100%;
     position: sticky;

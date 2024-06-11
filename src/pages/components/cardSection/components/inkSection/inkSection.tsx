@@ -18,9 +18,9 @@ export const InkSection = (props: Props) => {
     >
       <div className="relative">
         <div
-          className={`cardCost text-white font-bold text-2xl ${
-            isLocation ? "locationCost" : "baseCost"
-          }`}
+          className={`cardCost text-white font-bold ${
+            isLocation ? "text-sm locationCost" : "baseCost"
+          } sm:text-2xl `}
         >
           {cost}
         </div>
