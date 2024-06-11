@@ -53,23 +53,30 @@ export const AutocompleteComponent = (props: Props) => {
     }
   }, [optionDispatch, optionKey, preselect, selectedCard]);
 
+  const setObj = new Map(
+    cardOptions[optionKey].map((obj) => {
+      return [JSON.stringify(obj), obj];
+    })
+  );
+  const options = Array.from(setObj.values()).sort((a, b) => {
+    const valueA = a.value.toUpperCase();
+    const valueB = b.value.toUpperCase();
+
+    if (valueA < valueB) {
+      return -1;
+    }
+    if (valueA > valueB) {
+      return 1;
+    }
+
+    return 0;
+  });
+
   return (
     <Autocomplete
       disablePortal
       id={id}
-      options={cardOptions[optionKey].sort((a, b) => {
-        const valueA = a.value.toUpperCase();
-        const valueB = b.value.toUpperCase();
-
-        if (valueA < valueB) {
-          return -1;
-        }
-        if (valueA > valueB) {
-          return 1;
-        }
-
-        return 0;
-      })}
+      options={options}
       getOptionDisabled={(option) =>
         disableOption!! && option.value === "Location"
       }

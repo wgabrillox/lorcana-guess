@@ -33,7 +33,6 @@ export default function App() {
     axios.get("https://api.lorcana-api.com/cards/all").then((res) => {
       setCards(res.data);
     });
-    // setCards([mock]);
   }, []);
   return cards ? <Main cards={cards} /> : <div />;
 }
