@@ -109,3 +109,49 @@ type Reset = {
 };
 
 export type OptionActions = Guess | DevTool | IncorrectGuess | Reset;
+
+export interface Set {
+  setName: number;
+  releaseDate: string;
+  cards: number;
+  name: string;
+  setId: string;
+}
+
+export interface FilterOptions {
+  [key: string]: { [key: string]: boolean };
+
+  sets: {
+    [key: string]: boolean;
+
+    tfc: boolean;
+    rof: boolean;
+    ink: boolean;
+    urs: boolean;
+  };
+  colors: {
+    [key: string]: boolean;
+
+    amber: boolean;
+    amethyst: boolean;
+    ruby: boolean;
+    steel: boolean;
+    sapphire: boolean;
+    emerald: boolean;
+  };
+  type: {
+    [key: string]: boolean;
+
+    action: boolean;
+    song: boolean;
+    character: boolean;
+    item: boolean;
+    location: boolean;
+  };
+}
+
+export interface Filter {
+  category: string;
+  filter: string;
+  value: boolean;
+}

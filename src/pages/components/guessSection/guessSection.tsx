@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { useOption, useOptionDispatch } from "../../optionsContext";
 import { Option, Card, CardOptions } from "../../../types";
-import { genericAnswers, IMAGES } from "../../../constants";
+import {
+  genericAnswers,
+  IMAGES,
+  colorIconBackgroundColor,
+} from "../../../constants";
 import Button from "@mui/material/Button";
 import "./guessSection.css";
 import { AutocompleteComponent } from "./components/autocompleteComponent";
@@ -14,15 +18,6 @@ type Props = {
   randomCard: () => void;
 };
 
-export const colorIconBackgroundColor: { [key: string]: string } = {
-  amber: "rgba(244, 179, 1, 0.3);",
-  amethyst: "rgba(128, 56, 123, 0.3);",
-  ruby: "rgba(210, 11, 46, 0.3)",
-  steel: "rgba(159, 169, 179, 0.3)",
-  sapphire: "rgba(2, 137, 195, 0.3)",
-  emerald: "rgba(41, 138, 52, 0.3)",
-};
-
 export const formLabelProps = {
   color: "text.primary",
   fontWeight: "bold",
@@ -30,6 +25,7 @@ export const formLabelProps = {
 
 export const GuessSection = (props: Props) => {
   const { selectedCard, cardOptions, randomCard } = props;
+
   const cardKeys = genericAnswers.reduce(
     (acc, curr) =>
       selectedCard[curr] !== undefined
@@ -216,6 +212,7 @@ export const GuessSection = (props: Props) => {
                     label="Strength"
                     disabled={!isCharSelected}
                     isShowingCard={showSelectNew}
+                    min={0}
                   />
                 </div>
                 <div className="flex-1 content-center">

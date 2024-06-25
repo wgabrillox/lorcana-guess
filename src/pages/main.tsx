@@ -2,62 +2,24 @@ import { useState, useEffect } from "react";
 import { Card, CardOptions } from "../types";
 import { CardSection } from "./components/cardSection/cardSection";
 import { GuessSection } from "./components/guessSection/guessSection";
-import { DevTools } from "./devTools";
 import { OptionsProvider } from "./optionsContext";
+import { useOptionDispatch } from "./optionsContext";
 import "./main.css";
+import Button from "@mui/material/Button";
 
 type Props = {
   cards: Card[];
+  cardOptions: CardOptions;
+  setShowGame: () => void;
 };
 
 export const Main = (props: Props) => {
-  const { cards } = props;
-  const [cardOptions, setCardOptions] = useState<CardOptions>({
-    type: [],
-    color: [],
-    name: [],
-    bodyText: [],
-  });
-
-  useEffect(() => {
-    let cardTypes: string[] = [];
-    let colorTypes: string[] = [];
-    const cardOptions = cards.reduce<CardOptions>(
-      (acc, card) => {
-        const { type, color, name, bodyText } = card;
-        if (!cardTypes.includes(type)) {
-          cardTypes = [...cardTypes, type];
-          acc["type"] = [...acc["type"], { value: type, label: type }];
-        }
-
-        if (!colorTypes.includes(color)) {
-          colorTypes = [...colorTypes, color];
-          acc["color"] = [...acc["color"], { value: color, label: color }];
-        }
-        acc["name"] = [...acc["name"], { value: name, label: name }];
-        acc["bodyText"] = bodyText
-          ? [...acc["bodyText"], { value: bodyText, label: bodyText }]
-          : acc["bodyText"];
-        return acc;
-      },
-      {
-        type: [],
-        color: [],
-        name: [],
-        bodyText: [],
-      }
-    );
-
-    setCardOptions(cardOptions);
-  }, [cards]);
-
+  const { cards, cardOptions, setShowGame } = props;
   const [selectedCard, setSelectedCard] = useState<Card>(
     cards[Math.floor(Math.random() * cards.length)]
   );
 
-  const updateSelectedCard = (num: number) => {
-    setSelectedCard(cards[num]);
-  };
+  const optionDispatch = useOptionDispatch();
 
   const randomCard = () => {
     const cardNum = Math.floor(Math.random() * cards.length);
@@ -66,19 +28,34 @@ export const Main = (props: Props) => {
 
   const isLocation = selectedCard.type === "Location";
 
+  const resetCardGuesses = () => {
+    randomCard();
+    optionDispatch!({
+      type: "reset",
+    });
+  };
+
   return (
     <>
-      <OptionsProvider>
-        {/* <DevTools setSelectedCard={updateSelectedCard} /> */}
-        <div className="flex mx-auto lg:w-fit flex-col lg:flex-row lg:translate-y-1/4 mt-4 xl:mt-0">
-          <CardSection image={selectedCard?.image} isLocation={isLocation} />
-          <GuessSection
-            selectedCard={selectedCard}
-            cardOptions={cardOptions}
-            randomCard={randomCard}
-          />
+      <div className="flex mx-auto lg:w-fit flex-col lg:flex-row lg:translate-y-1/4 mt-4 xl:mt-0">
+        <div className="absolute right-0 z-10 mr-2">
+          <Button
+            variant="contained"
+            onClick={() => {
+              setShowGame();
+              resetCardGuesses();
+            }}
+          >
+            Back
+          </Button>
         </div>
-      </OptionsProvider>
+        <CardSection image={selectedCard?.image} isLocation={isLocation} />
+        <GuessSection
+          selectedCard={selectedCard}
+          cardOptions={cardOptions}
+          randomCard={randomCard}
+        />
+      </div>
     </>
   );
 };
