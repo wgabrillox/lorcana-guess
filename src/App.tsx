@@ -64,12 +64,28 @@ export default function App() {
   const [showGame, setShowGame] = useState(false);
 
   useEffect(() => {
-    axios.get("https://api.lorcana-api.com/cards/all").then((res) => {
+    axios.get("https://api.lorcana-api.com/bulk/cards").then((res) => {
       setCards(res.data);
       setBaseCards(res.data);
     });
-    axios.get("https://api.lorcana-api.com/sets/all").then((res) => {
-      setSets(res.data);
+    axios.get("https://api.lorcana-api.com/bulk/sets").then((res) => {
+      setSets(
+        res.data
+          .filter((set: any) => set.setId !== "QU1")
+          .sort((a: any, b: any) => {
+            const valueA = a.setNum;
+            const valueB = b.setNum;
+
+            if (valueA < valueB) {
+              return -1;
+            }
+            if (valueA > valueB) {
+              return 1;
+            }
+
+            return 0;
+          })
+      );
     });
   }, []);
 

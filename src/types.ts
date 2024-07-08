@@ -111,7 +111,7 @@ type Reset = {
 export type OptionActions = Guess | DevTool | IncorrectGuess | Reset;
 
 export interface Set {
-  setName: number;
+  setNum: number;
   releaseDate: string;
   cards: number;
   name: string;
