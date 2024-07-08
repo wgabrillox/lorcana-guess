@@ -65,7 +65,7 @@ export const CharStatSection = (props: Props) => {
               <div
                 className={`${
                   type === "Character"
-                    ? "ml-3.5 md:ml-5 mt-1"
+                    ? "ml-3.5 sm:ml-5 mt-0 sm:mt-1"
                     : `text-center ${
                         splitName.length === 2 ? "md:mt-2" : "sm: mt-2 md:mt-4"
                       }`
@@ -84,7 +84,7 @@ export const CharStatSection = (props: Props) => {
                 isLocation ? "locationTypeLabel" : "cardTypeLabel"
               }`}
             >
-              <div className="mx-auto my-0 text-center text-sm md:text-base">
+              <div className="mx-auto my-0 text-center text-sm sm:text-base">
                 {type}
               </div>
             </div>
@@ -96,10 +96,10 @@ export const CharStatSection = (props: Props) => {
           <div className="absolute charStats">
             <img src={colorCharStats} alt="char stats" />
           </div>
-          <div className="strength font-bold text-lg md:text-2xl ">
+          <div className="strength font-bold text-lg sm:text-2xl ">
             {strength}
           </div>
-          <div className="willpower text-white font-bold text-lg md:text-2xl ">
+          <div className="willpower text-white font-bold text-lg sm:text-2xl ">
             {willpower}
           </div>
         </>
