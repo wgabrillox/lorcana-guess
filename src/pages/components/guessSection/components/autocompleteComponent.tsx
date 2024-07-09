@@ -55,12 +55,18 @@ export const AutocompleteComponent = (props: Props) => {
     }
   }, [optionDispatch, optionKey, preselect, selectedCard]);
 
-  const setObj = new Map(
-    cardOptions[optionKey].map((obj) => {
-      return [JSON.stringify(obj), obj];
-    })
-  );
-  const options = Array.from(setObj.values()).sort((a, b) => {
+  // Remove duplicate values (mainly for body text/description)
+  let uniqueValues: Option[] = [];
+  cardOptions[optionKey].reduce<{ [key: string]: Option }>((acc, curr) => {
+    if (acc[curr.value]) {
+      return acc;
+    } else {
+      uniqueValues.push({ value: curr.value, label: curr.label });
+      return { ...acc, [curr.value]: curr };
+    }
+  }, {});
+
+  const options = uniqueValues.sort((a, b) => {
     const valueA = a.value.toUpperCase();
     const valueB = b.value.toUpperCase();
 
@@ -92,6 +98,7 @@ export const AutocompleteComponent = (props: Props) => {
           error={incorrectState[optionKey] && devToolOptionState.showIncorrect}
         />
       )}
+      isOptionEqualToValue={(option, value) => option.value === value.value}
       onChange={(event: any, newValue: Option | null) => {
         optionDispatch!({
           type: "guess",
