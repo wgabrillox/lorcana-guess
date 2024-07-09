@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, CardOptions } from "../types";
 import { CardSection } from "./components/cardSection/cardSection";
 import { GuessSection } from "./components/guessSection/guessSection";
-import { OptionsProvider } from "./optionsContext";
 import { useOptionDispatch } from "./optionsContext";
 import "./main.css";
 import Button from "@mui/material/Button";

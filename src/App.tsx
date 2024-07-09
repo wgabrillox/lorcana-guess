@@ -71,8 +71,8 @@ export default function App() {
     axios.get("https://api.lorcana-api.com/bulk/sets").then((res) => {
       setSets(
         res.data
-          .filter((set: any) => set.setId !== "QU1")
-          .sort((a: any, b: any) => {
+          .filter((set: Set) => set.setId !== "QU1")
+          .sort((a: Set, b: Set) => {
             const valueA = a.setNum;
             const valueB = b.setNum;
 
