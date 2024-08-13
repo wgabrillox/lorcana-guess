@@ -36,6 +36,7 @@ export default function App() {
       rof: true,
       ink: true,
       urs: true,
+      ssk: true,
     },
     colors: {
       amber: true,
