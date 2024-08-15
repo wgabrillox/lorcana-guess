@@ -151,8 +151,28 @@ export interface FilterOptions {
   };
 }
 
+export interface AttributeOptions {
+  [key: string]: boolean;
+
+  bodyText: boolean;
+  color: boolean;
+  cost: boolean;
+  inkable: boolean;
+  name: boolean;
+  type: boolean;
+  lore: boolean;
+  strength: boolean;
+  willpower: boolean;
+  moveCost: boolean;
+}
+
 export interface Filter {
   category: string;
   filter: string;
+  value: boolean;
+}
+
+export interface Attribute {
+  attribute: string;
   value: boolean;
 }

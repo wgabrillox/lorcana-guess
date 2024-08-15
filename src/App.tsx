@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Card, Set, CardOptions, FilterOptions, Filter } from "./types";
+import {
+  Card,
+  Set,
+  CardOptions,
+  FilterOptions,
+  Filter,
+  AttributeOptions,
+  Attribute,
+} from "./types";
 import { Main } from "./pages/main";
 import { SplashScreen } from "./pages/splashScreen";
 import { OptionsProvider } from "./pages/optionsContext";
@@ -54,6 +62,20 @@ export default function App() {
       location: true,
     },
   });
+
+  const [selectedAttributes, setSelectedAttributes] =
+    useState<AttributeOptions>({
+      bodyText: true,
+      color: true,
+      cost: true,
+      inkable: true,
+      name: true,
+      type: true,
+      lore: true,
+      strength: true,
+      willpower: true,
+      moveCost: true,
+    });
 
   const [cardOptions, setCardOptions] = useState<CardOptions>({
     type: [],
@@ -155,6 +177,12 @@ export default function App() {
       },
     });
 
+  const updateAttribute = ({ attribute, value }: Attribute) =>
+    setSelectedAttributes({
+      ...selectedAttributes,
+      [attribute]: value,
+    });
+
   const selectAllFilters = (toggle: boolean) => {
     const newState = Object.keys(selectedFilters).reduce<FilterOptions>(
       (acc, category) => {
@@ -192,6 +220,8 @@ export default function App() {
               updateFilter={updateFilter}
               selectedFilters={selectedFilters}
               selectAllFilters={selectAllFilters}
+              updateAttribute={updateAttribute}
+              selectedAttributes={selectedAttributes}
               setShowGame={filterOptions}
               showError={showError}
             />

@@ -1,4 +1,10 @@
-import { Set, Filter, FilterOptions } from "../types";
+import {
+  Set,
+  Filter,
+  FilterOptions,
+  Attribute,
+  AttributeOptions,
+} from "../types";
 import "./main.css";
 import Button from "@mui/material/Button";
 import FormGroup from "@mui/material/FormGroup";
@@ -13,6 +19,8 @@ type Props = {
   updateFilter: (options: Filter) => void;
   selectedFilters: FilterOptions;
   selectAllFilters: (toggle: boolean) => void;
+  updateAttribute: (options: Attribute) => void;
+  selectedAttributes: AttributeOptions;
   setShowGame: () => void;
   showError: boolean;
 };
@@ -23,10 +31,15 @@ export const SplashScreen = (props: Props) => {
     updateFilter,
     selectedFilters,
     selectAllFilters,
+    updateAttribute,
+    selectedAttributes,
     setShowGame,
     showError,
   } = props;
   const types = ["Action", "Song", "Character", "Item", "Location"];
+  const easyAttributes = ["name", "color", "type"];
+  const normalAttributes = ["cost", "moveCost", "inkable"];
+  const hardAttributes = ["willpower", "strength", "lore", "bodyText"];
 
   return (
     <>
@@ -35,7 +48,7 @@ export const SplashScreen = (props: Props) => {
           <div className="flex font-bold text-2xl md:text-4xl justify-center">
             Disney Lorcana: Guess the Card
           </div>
-          <div className="w-fit mx-auto">
+          <div className="w-fit mx-auto border-b-2 pb-2">
             {sets !== null && (
               <FormGroup>
                 <div className="flex flex-col md:flex-row">
@@ -160,11 +173,112 @@ export const SplashScreen = (props: Props) => {
                 </Button>
               </div>
             </div>
-
-            <div className="mx-auto w-fit mt-2 flex">
-              <Button variant="outlined" onClick={() => setShowGame()}>
-                Begin!
-              </Button>
+          </div>
+          <div className="w-fit mx-auto">
+            <div className="flex font-bold text-1xl md:text-2xl justify-center">
+              Attributes:
+            </div>
+            <FormGroup>
+              <div className="flex flex-col md:flex-row justify-left">
+                <div className="font-bold text-xl mx-auto md:mr-2 md:mx-0 content-center border-b-2 border-slate-500 md:border-0">
+                  Easy:
+                </div>
+                <div className="mx-auto md:mx-0">
+                  {easyAttributes.map((attribute) => (
+                    <FormControlLabel
+                      key={attribute}
+                      control={
+                        <Checkbox
+                          checked={selectedAttributes[attribute]}
+                          onChange={({ target }) =>
+                            updateAttribute({
+                              attribute: attribute,
+                              value: target.checked,
+                            })
+                          }
+                        />
+                      }
+                      label={`${attribute
+                        .charAt(0)
+                        .toUpperCase()}${attribute.slice(1)}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </FormGroup>
+            <FormGroup>
+              <div className="flex flex-col md:flex-row justify-left">
+                <div className="font-bold text-xl mx-auto md:mr-2 md:mx-0 content-center border-b-2 border-slate-500 md:border-0">
+                  Normal:
+                </div>
+                <div className="mx-auto md:mx-0">
+                  {normalAttributes.map((attribute) => (
+                    <FormControlLabel
+                      key={attribute}
+                      control={
+                        <Checkbox
+                          checked={selectedAttributes[attribute]}
+                          onChange={({ target }) =>
+                            updateAttribute({
+                              attribute: attribute,
+                              value: target.checked,
+                            })
+                          }
+                        />
+                      }
+                      label={`${attribute
+                        .charAt(0)
+                        .toUpperCase()}${attribute.slice(1)}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </FormGroup>
+            <FormGroup>
+              <div className="flex flex-col md:flex-row justify-left">
+                <div className="font-bold text-xl mx-auto md:mr-2 md:mx-0 content-center border-b-2 border-slate-500 md:border-0">
+                  Hard:
+                </div>
+                <div className="mx-auto md:mx-0">
+                  {hardAttributes.map((attribute) => (
+                    <FormControlLabel
+                      key={attribute}
+                      control={
+                        <Checkbox
+                          checked={selectedAttributes[attribute]}
+                          onChange={({ target }) =>
+                            updateAttribute({
+                              attribute: attribute,
+                              value: target.checked,
+                            })
+                          }
+                        />
+                      }
+                      label={`${attribute
+                        .charAt(0)
+                        .toUpperCase()}${attribute.slice(1)}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </FormGroup>
+            <div className="flex font-bold text-4xl justify-center">
+              <div className="mr-2">
+                <Button
+                  variant="outlined"
+                  onClick={() => selectAllFilters(true)}
+                >
+                  Select All
+                </Button>
+              </div>
+              <div>
+                <Button
+                  variant="outlined"
+                  onClick={() => selectAllFilters(false)}
+                >
+                  Unselect All
+                </Button>
+              </div>
             </div>
           </div>
           {showError && (
@@ -173,7 +287,13 @@ export const SplashScreen = (props: Props) => {
             </Alert>
           )}
         </div>
+        <div className="mx-auto w-fit mt-2 flex">
+          <Button variant="outlined" onClick={() => setShowGame()}>
+            Begin!
+          </Button>
+        </div>
       </div>
+
       <div className="absolute bottom-0">
         <DisclaimerDialog />
       </div>
