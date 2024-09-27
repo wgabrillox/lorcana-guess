@@ -2,7 +2,9 @@ import { IMAGES } from "../../../constants";
 import { InkSection } from "./components/inkSection/inkSection";
 import { CharStatSection } from "./components/charStatSection/charStatSection";
 import { DescriptionSection } from "./components/descriptionSection/descriptionSection";
-import { useOption } from "../../optionsContext";
+import { useOption, useOptionDispatch } from "../../optionsContext";
+import { Option, Card, CardOptions } from "../../../types";
+
 import "./cardSection.css";
 
 type Props = {
@@ -12,7 +14,10 @@ type Props = {
 
 export const CardSection = (props: Props) => {
   const { image, isLocation } = props;
-  const { showEmptyPlaceholders } = useOption().devToolOptionState;
+  const { showEmptyPlaceholders } = useOption().globalOptionState;
+
+  const attributeState = useOption()?.attributeOptionState;
+
   return (
     <div className={`relative lg:mr-2 cardWrapper mx-auto`}>
       <img
@@ -30,7 +35,7 @@ export const CardSection = (props: Props) => {
             isLocation ? "outlineLocationCard" : "outlineCard"
           }`}
         >
-          <InkSection isLocation={isLocation} />
+          <InkSection isLocation={isLocation} attributes={attributeState} />
           <CharStatSection isLocation={isLocation} />
           <DescriptionSection isLocation={isLocation} />
           <img

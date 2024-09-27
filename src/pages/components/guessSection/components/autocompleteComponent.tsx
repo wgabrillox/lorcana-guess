@@ -1,5 +1,5 @@
 import { Option, CardOptions, Card } from "../../../../types";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { TextField, Autocomplete } from "@mui/material";
 import { useOption, useOptionDispatch } from "../../../optionsContext";
 
@@ -13,6 +13,7 @@ type Props = {
   disableOption?: boolean;
   selectedCard?: Card;
   isShowingCard: boolean;
+  trueValue: string | undefined;
 };
 
 export const AutocompleteComponent = (props: Props) => {
@@ -26,18 +27,26 @@ export const AutocompleteComponent = (props: Props) => {
     disableOption,
     selectedCard,
     isShowingCard,
+    trueValue,
   } = props;
-  const optionState = useOption()?.guessOptionState;
-  const devToolOptionState = useOption()?.devToolOptionState;
-  const incorrectState = useOption()?.incorrectGuessState;
+
+  const {
+    guessOptionState,
+    globalOptionState,
+    incorrectGuessState,
+    attributeOptionState,
+  } = useOption();
+
   const optionDispatch = useOptionDispatch();
 
   const optionKey = keyLabel ? keyLabel : label.toLowerCase();
 
   const selectedValues = useMemo(
     () =>
-      cardOptions[optionKey].filter((v) => v.value === optionState[optionKey]),
-    [cardOptions, optionKey, optionState]
+      cardOptions[optionKey].filter(
+        (v) => v.value === guessOptionState[optionKey]
+      ),
+    [cardOptions, optionKey, guessOptionState]
   );
 
   const sxProp = width
@@ -53,7 +62,20 @@ export const AutocompleteComponent = (props: Props) => {
         action: { [optionKey]: preselect! },
       });
     }
-  }, [optionDispatch, optionKey, preselect, selectedCard]);
+    if (!attributeOptionState[optionKey]) {
+      optionDispatch!({
+        type: "guess",
+        action: { [optionKey]: trueValue! },
+      });
+    }
+  }, [
+    optionDispatch,
+    optionKey,
+    preselect,
+    selectedCard,
+    trueValue,
+    attributeOptionState,
+  ]);
 
   // Remove duplicate values (mainly for body text/description)
   let uniqueValues: Option[] = [];
@@ -88,14 +110,20 @@ export const AutocompleteComponent = (props: Props) => {
       getOptionDisabled={(option) =>
         disableOption!! && option.value === "Location"
       }
-      disabled={preselect !== undefined || isShowingCard}
+      disabled={
+        preselect !== undefined ||
+        isShowingCard ||
+        !attributeOptionState[optionKey]
+      }
       value={selectedValues.length ? selectedValues[0] : null}
       sx={sxProp}
       renderInput={(params) => (
         <TextField
           {...params}
           label={label}
-          error={incorrectState[optionKey] && devToolOptionState.showIncorrect}
+          error={
+            incorrectGuessState[optionKey] && globalOptionState.showIncorrect
+          }
         />
       )}
       isOptionEqualToValue={(option, value) => option.value === value.value}
