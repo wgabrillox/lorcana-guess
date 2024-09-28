@@ -1,16 +1,15 @@
 import { IMAGES } from "../../../../../constants";
 import { useOption } from "../../../../optionsContext";
-import { AttributeOptions } from "../../../../../types";
 import "./inkSection.css";
 
 type Props = {
   isLocation: boolean;
-  attributes: AttributeOptions;
 };
 
 export const InkSection = (props: Props) => {
-  const { isLocation, attributes } = props;
+  const { isLocation } = props;
   const { inkable, cost } = useOption()?.guessOptionState;
+  const attributes = useOption()?.attributeOptionState;
 
   return (
     <div

@@ -14,6 +14,7 @@ type Props = {
 
 export const Main = (props: Props) => {
   const { cards, cardOptions, setShowGame } = props;
+  const [filteredCards, setFilteredCards] = useState<Card[]>();
   const [selectedCard, setSelectedCard] = useState<Card>();
   const [isLocation, setIsLocation] = useState<boolean>(false);
   const [loaded, setIsLoaded] = useState<boolean>(false);
@@ -30,6 +31,7 @@ export const Main = (props: Props) => {
         filterOptionState.type[isSong ? "song" : card.type.toLowerCase()];
       return setIncluded && colorIncluded && typeIncluded;
     });
+    setFilteredCards(filteredOptions);
     const selectedCard =
       filteredOptions[Math.floor(Math.random() * filteredOptions.length)];
     setSelectedCard(selectedCard);
@@ -46,8 +48,8 @@ export const Main = (props: Props) => {
   const optionDispatch = useOptionDispatch();
 
   const randomCard = () => {
-    const cardNum = Math.floor(Math.random() * cards.length);
-    setSelectedCard(cards[cardNum]);
+    const cardNum = Math.floor(Math.random() * filteredCards!.length);
+    setSelectedCard(filteredCards![cardNum]);
   };
 
   const resetCardGuesses = () => {
