@@ -3,7 +3,6 @@ import { InkSection } from "./components/inkSection/inkSection";
 import { CharStatSection } from "./components/charStatSection/charStatSection";
 import { DescriptionSection } from "./components/descriptionSection/descriptionSection";
 import { useOption } from "../../optionsContext";
-
 import "./cardSection.css";
 
 type Props = {
@@ -14,7 +13,6 @@ type Props = {
 export const CardSection = (props: Props) => {
   const { image, isLocation } = props;
   const { showEmptyPlaceholders } = useOption().globalOptionState;
-
   return (
     <div className={`relative lg:mr-2 cardWrapper mx-auto`}>
       <img
