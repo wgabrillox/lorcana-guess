@@ -50,7 +50,7 @@ export const RadioGroupComponent = (props: Props) => {
         action: { [optionKey]: trueValue },
       });
     }
-  });
+  }, [attributeOptionState, optionDispatch, optionKey, trueValue]);
 
   return (
     <>

@@ -4,6 +4,7 @@ import "./inkSection.css";
 
 type Props = {
   isLocation: boolean;
+  isInkable: boolean;
 };
 
 export const InkSection = (props: Props) => {
@@ -27,9 +28,18 @@ export const InkSection = (props: Props) => {
         >
           {cost}
         </div>
+        <img
+          src={IMAGES.costEmpty}
+          alt="base cost empty"
+          className={`absolute ${
+            isLocation ? "baseLocationCostEmpty" : "baseCostEmpty"
+          }
+          ${attributes.cost ? "" : "hidden"}
+          `}
+        />
         <div className={`${!attributes.inkable && "invisible"}`}>
           <img
-            src={IMAGES.baseInkEmpty}
+            src={attributes.cost ? IMAGES.baseInkEmpty : IMAGES.baseInkCost}
             alt="base ink"
             className={`absolute ${
               isLocation ? "baseLocationEmpty" : "baseInkEmpty"
@@ -37,7 +47,7 @@ export const InkSection = (props: Props) => {
           />
           {inkable ? (
             <img
-              src={IMAGES.inkableEmpty}
+              src={attributes.cost ? IMAGES.baseInkable : IMAGES.inkableEmpty}
               alt="emtpy ink"
               className={`absolute ${
                 isLocation ? "locationInkEmpty" : "inkEmpty"
@@ -45,7 +55,9 @@ export const InkSection = (props: Props) => {
             />
           ) : (
             <img
-              src={IMAGES.nonInkableEmpty}
+              src={
+                attributes.cost ? IMAGES.baseNonInkable : IMAGES.nonInkableEmpty
+              }
               alt="emtpy unink"
               className={`absolute ${
                 isLocation ? "locationNoninkEmpty" : "noninkEmpty"

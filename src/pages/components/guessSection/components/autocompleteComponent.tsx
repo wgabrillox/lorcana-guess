@@ -68,23 +68,16 @@ export const AutocompleteComponent = (props: Props) => {
         action: { [optionKey]: trueValue! },
       });
     }
-  }, [
-    optionDispatch,
-    optionKey,
-    preselect,
-    selectedCard,
-    trueValue,
-    attributeOptionState,
-  ]);
+  }, [optionDispatch, optionKey, preselect, trueValue, attributeOptionState]);
 
   // Remove duplicate values (mainly for body text/description)
   let uniqueValues: Option[] = [];
   cardOptions[optionKey].reduce<{ [key: string]: Option }>((acc, curr) => {
-    if (acc[curr.value]) {
+    if (acc[curr.value.trim()]) {
       return acc;
     } else {
-      uniqueValues.push({ value: curr.value, label: curr.label });
-      return { ...acc, [curr.value]: curr };
+      uniqueValues.push({ value: curr.value.trim(), label: curr.label.trim() });
+      return { ...acc, [curr.value.trim()]: curr };
     }
   }, {});
 

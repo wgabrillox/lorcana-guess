@@ -16,7 +16,6 @@ export const Main = (props: Props) => {
   const { cards, cardOptions, setShowGame } = props;
   const [filteredCards, setFilteredCards] = useState<Card[]>();
   const [selectedCard, setSelectedCard] = useState<Card>();
-  const [isLocation, setIsLocation] = useState<boolean>(false);
   const [loaded, setIsLoaded] = useState<boolean>(false);
 
   const { filterOptionState } = useOption();
@@ -35,7 +34,6 @@ export const Main = (props: Props) => {
     const selectedCard =
       filteredOptions[Math.floor(Math.random() * filteredOptions.length)];
     setSelectedCard(selectedCard);
-    setIsLocation(selectedCard!.type === "Location");
     setIsLoaded(true);
   }, [
     cards,
@@ -74,7 +72,7 @@ export const Main = (props: Props) => {
               Back
             </Button>
           </div>
-          <CardSection image={selectedCard!?.image} isLocation={isLocation} />
+          <CardSection selectedCard={selectedCard} />
           <GuessSection
             selectedCard={selectedCard!}
             cardOptions={cardOptions}

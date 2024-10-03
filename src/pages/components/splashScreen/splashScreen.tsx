@@ -62,7 +62,7 @@ export const SplashScreen = (props: Props) => {
         </div>
       </div>
 
-      <div className="absolute bottom-0">
+      <div className="fixed bottom-0 z-2 bg-white w-full">
         <DisclaimerDialog />
       </div>
     </>
