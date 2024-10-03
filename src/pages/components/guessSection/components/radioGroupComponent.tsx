@@ -80,6 +80,7 @@ export const RadioGroupComponent = (props: Props) => {
           sx={{
             width: 44,
             height: 44,
+            margin: 0,
 
             "&.Mui-checked": {
               bgcolor: colorIconBackgroundColor[color.label.toLowerCase()],

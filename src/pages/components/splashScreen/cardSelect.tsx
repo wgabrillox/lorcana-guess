@@ -32,12 +32,15 @@ export const CardSelect = (props: Props) => {
         <AccordionDetails>
           {sets !== null && (
             <div className="flex flex-col md:flex-row justify-left my-2">
-              <div className="font-bold text-xl mx-auto md:mr-1 md:mx-0 content-center border-b-2 border-slate-500 md:border-0">
+              <div className="font-bold text-xl mx-auto md:mr-1 md:mx-0 content-center border-b-2 border-slate-500 md:border-0 mb-2">
                 Sets:
               </div>
-              <div className="text-center md:flex">
+              <div className="text-center flex-none md:flex">
                 {sets.map((set) => (
-                  <div className="mr-1" key={set.name}>
+                  <div
+                    className="mr-1 mb-1 md:mb-0 inline-block"
+                    key={set.name}
+                  >
                     <Chip
                       label={set.name}
                       variant={
@@ -62,12 +65,15 @@ export const CardSelect = (props: Props) => {
             </div>
           )}
           <div className="flex flex-col md:flex-row justify-left md:my-2">
-            <div className="font-bold text-xl mx-auto md:mr-3 md:mx-0 content-center border-b-2 border-slate-500 md:border-0">
+            <div className="font-bold text-xl mx-auto md:mr-3 md:mx-0 content-center border-b-2 border-slate-500 md:border-0 mb-2">
               Colors:
             </div>
             <div className="mx-auto md:mx-0">
               {Object.keys(colorIconBackgroundColor).map((color) => (
                 <FormControlLabel
+                  sx={{
+                    margin: "0px",
+                  }}
                   key={color}
                   control={
                     <Checkbox
@@ -110,12 +116,12 @@ export const CardSelect = (props: Props) => {
             </div>
           </div>
           <div className="flex flex-col md:flex-row">
-            <div className="font-bold text-xl mx-auto md:mr-1 md:mx-0 content-center border-b-2 border-slate-500 md:border-0">
+            <div className="font-bold text-xl mx-auto md:mr-1 md:mx-0 content-center border-b-2 border-slate-500 md:border-0 mb-2">
               Type:
             </div>
             <div className="inline-block justify-center text-center md:justify-left md:flex">
               {types.map((type) => (
-                <div className="mr-1" key={type}>
+                <div className="mr-1 inline-block" key={type}>
                   <Chip
                     label={type}
                     variant={

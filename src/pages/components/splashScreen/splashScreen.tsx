@@ -38,10 +38,11 @@ export const SplashScreen = (props: Props) => {
 
   return (
     <>
-      <div className="w-full h-screen content-center justify-center">
+      <div className="w-full h-screen content-center justify-center pb-2">
         <div className="lg:w-9/12 mx-auto ">
-          <div className="flex font-bold text-2xl md:text-4xl justify-center">
-            Disney Lorcana: Guess the Card
+          <div className="flex flex-col font-bold md:text-4xl items-center">
+            <div className="text-2xl">Disney Lorcana</div>
+            <div className="text-xl">Guess the Card</div>
           </div>
           <CardSelect sets={sets} />
           <AttributeSelect />
@@ -62,7 +63,7 @@ export const SplashScreen = (props: Props) => {
         </div>
       </div>
 
-      <div className="fixed bottom-0 z-2 bg-white w-full">
+      <div className="fixed bottom-0 z-2 bg-white">
         <DisclaimerDialog />
       </div>
     </>

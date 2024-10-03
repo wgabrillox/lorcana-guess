@@ -1,4 +1,3 @@
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Button from "@mui/material/Button";
 import { useOption, useOptionDispatch } from "../../optionsContext";
 import Chip from "@mui/material/Chip";
@@ -104,24 +103,21 @@ export const AttributeSelect = (props: Props) => {
       1
     )}`;
     return (
-      <FormControlLabel
-        control={
-          <Chip
-            label={`${label ? label : baseLabel}`}
-            variant={attributeState[attribute] ? "outlined" : "filled"}
-            className="ml-1"
-            onClick={() =>
-              optionDispatch!({
-                type: "attribute",
-                action: {
-                  [attribute]: !attributeState[attribute],
-                },
-              })
-            }
-          />
-        }
-        label=""
-      />
+      <div className="mr-1 inline-block">
+        <Chip
+          label={`${label ? label : baseLabel}`}
+          variant={attributeState[attribute] ? "outlined" : "filled"}
+          className="ml-1"
+          onClick={() =>
+            optionDispatch!({
+              type: "attribute",
+              action: {
+                [attribute]: !attributeState[attribute],
+              },
+            })
+          }
+        />
+      </div>
     );
   };
 
@@ -135,8 +131,8 @@ export const AttributeSelect = (props: Props) => {
           Attributes:
         </AccordionSummary>
         <AccordionDetails>
-          <div className="flex flex-col md:flex-row justify-left my-2">
-            <div className="font-bold text-xl mx-auto md:mr-3 md:mx-0 content-center border-b-2 border-slate-500 md:border-0">
+          <div className="flex flex-col md:flex-row">
+            <div className="font-bold text-xl mx-auto md:mr-3 md:mx-0 content-center border-b-2 border-slate-500 md:border-0 mb-2">
               Easy:
             </div>
             <div className="mx-auto md:mx-0">
@@ -146,7 +142,7 @@ export const AttributeSelect = (props: Props) => {
             </div>
           </div>
           <div className="flex flex-col md:flex-row justify-left my-2">
-            <div className="font-bold text-xl mx-auto md:mr-3 md:mx-0 content-center border-b-2 border-slate-500 md:border-0">
+            <div className="font-bold text-xl mx-auto md:mr-3 md:mx-0 content-center border-b-2 border-slate-500 md:border-0 mb-2">
               Normal:
             </div>
             <div className="mx-auto md:mx-0">
@@ -156,10 +152,10 @@ export const AttributeSelect = (props: Props) => {
             </div>
           </div>
           <div className="flex flex-col md:flex-row justify-left my-2">
-            <div className="font-bold text-xl mx-auto md:mr-3 md:mx-0 content-center border-b-2 border-slate-500 md:border-0">
+            <div className="font-bold text-xl mx-auto md:mr-3 md:mx-0 content-center border-b-2 border-slate-500 md:border-0 mb-2">
               Hard:
             </div>
-            <div className="mx-auto md:mx-0">
+            <div className="mx-0">
               {hardAttributes.map((attribute) => (
                 <AttributeComponent
                   key={attribute.attribute}

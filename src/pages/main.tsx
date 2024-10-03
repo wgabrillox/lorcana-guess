@@ -61,7 +61,7 @@ export const Main = (props: Props) => {
     <>
       {loaded && (
         <div className="flex mx-auto lg:w-fit flex-col lg:flex-row lg:translate-y-1/4 mt-4 xl:mt-0">
-          <div className="absolute right-0 z-10 mr-2">
+          <div className="fixed right-0 z-10 mr-2">
             <Button
               variant="contained"
               onClick={() => {
