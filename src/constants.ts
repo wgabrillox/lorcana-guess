@@ -34,10 +34,18 @@ export const colorIconBackgroundColor: { [key: string]: string } = {
 export const IMAGES: ImagesList = {
   baseInkEmpty:
     "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715095314/Lorcana%20Guess/base-ink-empty.png",
-  inkableEmpty:
+  baseInkCost:
+    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1727735125/Lorcana%20Guess/non-inkable-empty-test-2_n0i9oz.png",
+  baseInkable:
     "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715128575/Lorcana%20Guess/inkable-empty_zvmzrs.png",
-  nonInkableEmpty:
+  inkableEmpty:
+    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1727722706/Lorcana%20Guess/inkable-empty-test_vvn5fk.png",
+  baseNonInkable:
     "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715095314/Lorcana%20Guess/non-inkable-empty.png",
+  nonInkableEmpty:
+    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1727722835/Lorcana%20Guess/non-inkable-empty-test_bwj2l2.png",
+  costEmpty:
+    "https://res.cloudinary.com/dhtbrbpni/image/upload/v1727727363/Lorcana%20Guess/cost-empty_ls5boh.png",
   baseCard:
     "https://res.cloudinary.com/dhtbrbpni/image/upload/v1715095314/Lorcana%20Guess/base-card.png",
   steelBanner:

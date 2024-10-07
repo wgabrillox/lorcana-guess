@@ -1,16 +1,12 @@
 import { useState } from "react";
 import { useOption, useOptionDispatch } from "../../optionsContext";
-import { Option, Card, CardOptions } from "../../../types";
-import {
-  genericAnswers,
-  IMAGES,
-  colorIconBackgroundColor,
-} from "../../../constants";
+import { Card, CardOptions } from "../../../types";
 import Button from "@mui/material/Button";
 import "./guessSection.css";
 import { AutocompleteComponent } from "./components/autocompleteComponent";
-import { Switch, Radio, FormControl, FormLabel, Box } from "@mui/material";
+import { Switch, FormLabel, Box } from "@mui/material";
 import { SliderComponent } from "./components/sliderComponent";
+import { RadioGroupComponent } from "./components/radioGroupComponent";
 
 type Props = {
   selectedCard: Card;
@@ -26,61 +22,51 @@ export const formLabelProps = {
 export const GuessSection = (props: Props) => {
   const { selectedCard, cardOptions, randomCard } = props;
 
-  const cardKeys = genericAnswers.reduce(
-    (acc, curr) =>
-      selectedCard[curr] !== undefined
-        ? { ...acc, [curr]: selectedCard[curr] }
-        : acc,
-    {}
+  const {
+    guessOptionState,
+    globalOptionState,
+    incorrectGuessState,
+    attributeOptionState,
+  } = useOption();
+
+  const selectedAttributes = Object.keys(attributeOptionState).filter(
+    (att: string) => attributeOptionState[att] && selectedCard[att]
   );
+
   const [correctCount, setCorrectCount] = useState<number | null>(null);
   const [showSelectNew, setShowSelectNew] = useState<boolean>(false);
 
-  const optionState = useOption()?.guessOptionState;
-  const devToolState = useOption()?.devToolOptionState;
-  const incorrectState = useOption()?.incorrectGuessState;
   const optionDispatch = useOptionDispatch();
-  const isCharSelected = optionState.type === "Character";
-  const isLocSelected = optionState.type === "Location";
+  const isCharSelected = guessOptionState.type === "Character";
+  const isLocSelected = guessOptionState.type === "Location";
 
-  const controlProps = (option: Option) => ({
-    checked: optionState.color === option.value,
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
-      optionDispatch!({
-        type: "guess",
-        action: { color: event.target.value },
-      }),
-    value: option.value,
-    name: "inkable-radio",
-  });
-
+  // On submit function to determine which selected answers are correct
+  // and add to count accordingly
   const checkAnswers = () => {
     let count = 0;
-    Object.keys(cardKeys).forEach((option) => {
-      if (selectedCard[option] === optionState[option]) {
+    selectedAttributes.forEach((option) => {
+      // continue in loop if attribute not part of select card
+      if (!selectedCard[option]) return;
+
+      const isCorrect = selectedCard[option] === guessOptionState[option];
+      if (isCorrect) {
         count += 1;
-        optionDispatch!({
-          type: "incorrectGuess",
-          action: {
-            [option]: false,
-          },
-        });
-      } else {
-        optionDispatch!({
-          type: "incorrectGuess",
-          action: {
-            [option]: true,
-          },
-        });
       }
+
+      optionDispatch!({
+        type: "incorrectGuess",
+        action: {
+          [option]: !isCorrect,
+        },
+      });
     });
     setCorrectCount(count);
 
-    if (count === Object.keys(cardKeys).length) {
+    if (count === Object.keys(selectedAttributes).length) {
       optionDispatch!({
-        type: "devTool",
+        type: "globalState",
         action: {
-          showEmptyPlaceholders: !devToolState.showEmptyPlaceholders,
+          showEmptyPlaceholders: !globalOptionState.showEmptyPlaceholders,
         },
       });
       setShowSelectNew(true);
@@ -110,6 +96,7 @@ export const GuessSection = (props: Props) => {
                 cardOptions={cardOptions}
                 width={{ xs: 1, sm: 1, md: 312 }}
                 isShowingCard={showSelectNew}
+                trueValue={selectedCard.name}
               />
               <AutocompleteComponent
                 label="Type"
@@ -120,54 +107,20 @@ export const GuessSection = (props: Props) => {
                 disableOption={true}
                 selectedCard={selectedCard}
                 isShowingCard={showSelectNew}
+                trueValue={selectedCard.type}
               />
             </div>
             <div className="flex flex-col md:flex-row flex-1 md:space-x-2">
-              {/* color and inkable/cost */}
+              {/* color and inkable/cost  */}
               <div>
                 <div>
-                  <FormControl>
-                    <div>
-                      <FormLabel
-                        sx={formLabelProps}
-                        error={
-                          incorrectState["color"] && devToolState.showIncorrect
-                        }
-                      >
-                        Color:
-                      </FormLabel>
-                      {cardOptions.color.map((color) => (
-                        <Radio
-                          {...controlProps(color)}
-                          key={color.value}
-                          checkedIcon={
-                            <img
-                              src={IMAGES[color.label.toLowerCase()]}
-                              alt={`${color.label} icon`}
-                            />
-                          }
-                          icon={
-                            <img
-                              src={IMAGES[color.label.toLowerCase()]}
-                              alt={`${color.label} icon`}
-                            />
-                          }
-                          sx={{
-                            width: 44,
-                            height: 44,
-
-                            "&.Mui-checked": {
-                              bgcolor:
-                                colorIconBackgroundColor[
-                                  color.label.toLowerCase()
-                                ],
-                            },
-                          }}
-                          disabled={showSelectNew}
-                        />
-                      ))}
-                    </div>
-                  </FormControl>
+                  <RadioGroupComponent
+                    label={"color"}
+                    cardOptions={cardOptions}
+                    showSelectNew={showSelectNew}
+                    disabled={!attributeOptionState.color}
+                    trueValue={selectedCard.color}
+                  />
                 </div>
                 <div className="flex flex-1 space-x-2">
                   <div className="flex-1">
@@ -176,14 +129,19 @@ export const GuessSection = (props: Props) => {
                         <FormLabel
                           sx={formLabelProps}
                           error={
-                            incorrectState["inkable"] &&
-                            devToolState.showIncorrect
+                            incorrectGuessState["inkable"] &&
+                            globalOptionState.showIncorrect
                           }
+                          disabled={!attributeOptionState.inkable}
                         >
                           Inkable:
                         </FormLabel>
                         <Switch
-                          checked={optionState.inkable}
+                          checked={
+                            attributeOptionState.inkable
+                              ? guessOptionState.inkable
+                              : selectedCard.inkable
+                          }
                           onChange={(event: any, newValue: boolean) =>
                             optionDispatch!({
                               type: "guess",
@@ -191,7 +149,9 @@ export const GuessSection = (props: Props) => {
                             })
                           }
                           size="small"
-                          disabled={showSelectNew}
+                          disabled={
+                            showSelectNew || !attributeOptionState.inkable
+                          }
                         />
                       </Box>
                     </div>
@@ -201,6 +161,8 @@ export const GuessSection = (props: Props) => {
                       label="Cost"
                       width={{ xs: 168, sm: 200, md: 200 }}
                       isShowingCard={showSelectNew}
+                      disabled={!attributeOptionState.cost}
+                      trueValue={selectedCard.cost}
                     />
                   </div>
                 </div>
@@ -210,16 +172,21 @@ export const GuessSection = (props: Props) => {
                 <div className="flex-1 content-center">
                   <SliderComponent
                     label="Strength"
-                    disabled={!isCharSelected}
+                    disabled={!isCharSelected || !attributeOptionState.strength}
                     isShowingCard={showSelectNew}
                     min={0}
+                    trueValue={selectedCard.strength}
                   />
                 </div>
                 <div className="flex-1 content-center">
                   <SliderComponent
                     label="Willpower"
-                    disabled={!isCharSelected && !isLocSelected}
+                    disabled={
+                      (!isCharSelected && !isLocSelected) ||
+                      !attributeOptionState.willpower
+                    }
                     isShowingCard={showSelectNew}
+                    trueValue={selectedCard.willpower}
                   />
                 </div>
               </div>
@@ -231,10 +198,14 @@ export const GuessSection = (props: Props) => {
                   <div className="flex-1 pl-0 md:pl-1 py-1">
                     <SliderComponent
                       label="Lore"
-                      max={isCharSelected ? 4 : 2}
+                      max={isCharSelected ? 5 : 2}
                       min={0}
-                      disabled={!isCharSelected && !isLocSelected}
+                      disabled={
+                        (!isCharSelected && !isLocSelected) ||
+                        !attributeOptionState.lore
+                      }
                       isShowingCard={showSelectNew}
+                      trueValue={selectedCard.lore}
                     />
                   </div>
                   <div className="flex-1 md:pl-1 py-1">
@@ -242,9 +213,12 @@ export const GuessSection = (props: Props) => {
                       label={`Move Cost`}
                       keyLabel="moveCost"
                       max={3}
-                      disabled={!isLocSelected}
+                      disabled={
+                        !isLocSelected || !attributeOptionState.moveCost
+                      }
                       labelWidth={"171px"}
                       isShowingCard={showSelectNew}
+                      trueValue={selectedCard.moveCost}
                     />
                   </div>
                 </div>
@@ -259,6 +233,7 @@ export const GuessSection = (props: Props) => {
             cardOptions={cardOptions}
             width={1}
             isShowingCard={showSelectNew}
+            trueValue={selectedCard.bodyText}
           />
         </div>
         <div className="flex flex-col md:flex-row">
@@ -274,7 +249,8 @@ export const GuessSection = (props: Props) => {
             </div>
             {correctCount !== null && (
               <div className="font-bold my-2 sm:flex-none md:flex-1 ml-2">
-                Correct Count: {correctCount}/{Object.keys(cardKeys).length}
+                Correct Count: {correctCount}/
+                {Object.keys(selectedAttributes).length}
               </div>
             )}
           </div>
@@ -296,9 +272,9 @@ export const GuessSection = (props: Props) => {
                     variant="outlined"
                     onClick={() =>
                       optionDispatch!({
-                        type: "devTool",
+                        type: "globalState",
                         action: {
-                          showIncorrect: !devToolState.showIncorrect,
+                          showIncorrect: !globalOptionState.showIncorrect,
                         },
                       })
                     }
@@ -307,16 +283,17 @@ export const GuessSection = (props: Props) => {
                       marginRight: 1,
                     }}
                   >
-                    {!devToolState.showIncorrect ? "Show" : "Hide"} Incorrect
+                    {!globalOptionState.showIncorrect ? "Show" : "Hide"}{" "}
+                    Incorrect
                   </Button>
                   <Button
                     variant="outlined"
                     onClick={() => {
                       optionDispatch!({
-                        type: "devTool",
+                        type: "globalState",
                         action: {
                           showEmptyPlaceholders:
-                            !devToolState.showEmptyPlaceholders,
+                            !globalOptionState.showEmptyPlaceholders,
                         },
                       });
                       setShowSelectNew(true);

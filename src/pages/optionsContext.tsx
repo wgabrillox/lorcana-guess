@@ -14,10 +14,9 @@ const initialOptionData = {
     lore: 0,
     moveCost: 1,
   },
-  devToolOptionState: {
+  globalOptionState: {
     showEmptyPlaceholders: true,
     showIncorrect: false,
-    cardNumber: 0,
   },
   incorrectGuessState: {
     bodyText: false,
@@ -27,6 +26,42 @@ const initialOptionData = {
     name: false,
     type: false,
     lore: false,
+    strength: false,
+    willpower: false,
+    moveCost: false,
+  },
+  filterOptionState: {
+    sets: {
+      tfc: true,
+      rof: true,
+      ink: true,
+      urs: true,
+      ssk: true,
+    },
+    colors: {
+      amber: true,
+      amethyst: true,
+      ruby: true,
+      steel: true,
+      sapphire: true,
+      emerald: true,
+    },
+    type: {
+      action: true,
+      song: true,
+      character: true,
+      item: true,
+      location: true,
+    },
+  },
+  attributeOptionState: {
+    bodyText: false,
+    color: true,
+    cost: true,
+    inkable: true,
+    name: true,
+    type: true,
+    lore: true,
     strength: false,
     willpower: false,
     moveCost: false,
@@ -73,11 +108,11 @@ function optionsReducer(state: OptionState, action: OptionActions) {
           ...action.action,
         },
       };
-    case "devTool":
+    case "globalState":
       return {
         ...state,
-        devToolOptionState: {
-          ...state.devToolOptionState,
+        globalOptionState: {
+          ...state.globalOptionState,
           ...action.action,
         },
       };
@@ -95,13 +130,61 @@ function optionsReducer(state: OptionState, action: OptionActions) {
         guessOptionState: {
           ...initialOptionData.guessOptionState,
         },
-        devToolOptionState: {
-          ...state.devToolOptionState,
+        globalOptionState: {
+          ...state.globalOptionState,
           showEmptyPlaceholders: true,
           showIncorrect: false,
         },
         incorrectGuessState: {
           ...initialOptionData.incorrectGuessState,
+        },
+      };
+    case "filter":
+      const { category, filter, value } = action.action;
+      return {
+        ...state,
+        filterOptionState: {
+          ...state.filterOptionState,
+          [category]: {
+            ...state.filterOptionState[category],
+            [filter]: value,
+          },
+        },
+      };
+    case "filterAll":
+      return {
+        ...state,
+        filterOptionState: {
+          sets: {
+            tfc: action.action,
+            rof: action.action,
+            ink: action.action,
+            urs: action.action,
+            ssk: action.action,
+          },
+          colors: {
+            amber: action.action,
+            amethyst: action.action,
+            ruby: action.action,
+            steel: action.action,
+            sapphire: action.action,
+            emerald: action.action,
+          },
+          type: {
+            action: action.action,
+            song: action.action,
+            character: action.action,
+            item: action.action,
+            location: action.action,
+          },
+        },
+      };
+    case "attribute":
+      return {
+        ...state,
+        attributeOptionState: {
+          ...state.attributeOptionState,
+          ...action.action,
         },
       };
     default:

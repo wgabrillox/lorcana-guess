@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Card, Set, CardOptions, FilterOptions, Filter } from "./types";
+import { Card, Set, CardOptions } from "./types";
 import { Main } from "./pages/main";
-import { SplashScreen } from "./pages/splashScreen";
+import { SplashScreen } from "./pages/components/splashScreen/splashScreen";
 import { OptionsProvider } from "./pages/optionsContext";
 
 axios.interceptors.response.use(
@@ -26,34 +26,8 @@ axios.interceptors.response.use(
 );
 
 export default function App() {
-  const [baseCards, setBaseCards] = useState<Card[] | null>();
   const [cards, setCards] = useState<Card[] | null>();
-  const [showError, setShowError] = useState<boolean>(false);
   const [sets, setSets] = useState<Set[] | null>(null);
-  const [selectedFilters, setSelectedFilters] = useState<FilterOptions>({
-    sets: {
-      tfc: true,
-      rof: true,
-      ink: true,
-      urs: true,
-      ssk: true,
-    },
-    colors: {
-      amber: true,
-      amethyst: true,
-      ruby: true,
-      steel: true,
-      sapphire: true,
-      emerald: true,
-    },
-    type: {
-      action: true,
-      song: true,
-      character: true,
-      item: true,
-      location: true,
-    },
-  });
 
   const [cardOptions, setCardOptions] = useState<CardOptions>({
     type: [],
@@ -67,7 +41,6 @@ export default function App() {
   useEffect(() => {
     axios.get("https://api.lorcana-api.com/bulk/cards").then((res) => {
       setCards(res.data);
-      setBaseCards(res.data);
     });
     axios.get("https://api.lorcana-api.com/bulk/sets").then((res) => {
       setSets(
@@ -126,56 +99,6 @@ export default function App() {
     }
   }, [cards]);
 
-  const filterOptions = () => {
-    const base = baseCards;
-    const filteredCards = base?.filter((card) => {
-      const isSong = card.type === "Action - Song";
-      let setIncluded = selectedFilters["sets"][card.setId.toLowerCase()];
-      let colorIncluded = selectedFilters["colors"][card.color.toLowerCase()];
-      let typeIncluded =
-        selectedFilters["type"][isSong ? "song" : card.type.toLowerCase()];
-      return setIncluded && colorIncluded && typeIncluded;
-    });
-
-    if (filteredCards?.length) {
-      setCards(filteredCards);
-      setShowError(false);
-      setShowGame(true);
-    } else {
-      setShowError(true);
-    }
-  };
-
-  const updateFilter = ({ category, filter, value }: Filter) =>
-    setSelectedFilters({
-      ...selectedFilters,
-      [category]: {
-        ...selectedFilters[category],
-        [filter]: value,
-      },
-    });
-
-  const selectAllFilters = (toggle: boolean) => {
-    const newState = Object.keys(selectedFilters).reduce<FilterOptions>(
-      (acc, category) => {
-        const newCategory = Object.keys(selectedFilters[category]).reduce(
-          (acc, filter) => ({
-            ...acc,
-            [filter]: toggle,
-          }),
-          {}
-        );
-        return {
-          ...acc,
-          [category]: newCategory,
-        };
-      },
-      {} as FilterOptions
-    );
-
-    setSelectedFilters(newState);
-  };
-
   return (
     <>
       <OptionsProvider>
@@ -187,14 +110,7 @@ export default function App() {
               setShowGame={() => setShowGame(false)}
             />
           ) : (
-            <SplashScreen
-              sets={sets}
-              updateFilter={updateFilter}
-              selectedFilters={selectedFilters}
-              selectAllFilters={selectAllFilters}
-              setShowGame={filterOptions}
-              showError={showError}
-            />
+            <SplashScreen sets={sets} setShowGame={() => setShowGame(true)} />
           )
         ) : (
           <div>Loading...</div>

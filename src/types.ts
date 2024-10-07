@@ -40,15 +40,29 @@ export interface SelectedGuessOptions {
   moveCost: number;
 }
 
-export interface SelectedDevTools {
+export interface SelectedGlobalTools {
   [key: string]: string | number | boolean | undefined;
 
   showEmptyPlaceholders: boolean;
-  cardNumber: number;
   showIncorrect: boolean;
 }
 
 export interface IncorrectGuessOptions {
+  [key: string]: boolean;
+
+  bodyText: boolean;
+  color: boolean;
+  cost: boolean;
+  inkable: boolean;
+  name: boolean;
+  type: boolean;
+  lore: boolean;
+  strength: boolean;
+  willpower: boolean;
+  moveCost: boolean;
+}
+
+export interface AttributeOptions {
   [key: string]: boolean;
 
   bodyText: boolean;
@@ -79,19 +93,21 @@ export interface CardOptions {
 
 export interface OptionState {
   guessOptionState: SelectedGuessOptions;
-  devToolOptionState: SelectedDevTools;
+  globalOptionState: SelectedGlobalTools;
+  filterOptionState: FilterOptions;
   incorrectGuessState: IncorrectGuessOptions;
+  attributeOptionState: AttributeOptions;
 }
 
 type Guess = {
   type: "guess";
   action: {
-    [key: string]: boolean | number | string;
+    [key: string]: boolean | number | string | undefined;
   };
 };
 
-type DevTool = {
-  type: "devTool";
+type GlobalState = {
+  type: "globalState";
   action: {
     [key: string]: boolean | number;
   };
@@ -108,7 +124,31 @@ type Reset = {
   type: "reset";
 };
 
-export type OptionActions = Guess | DevTool | IncorrectGuess | Reset;
+type AttributeAction = {
+  type: "attribute";
+  action: {
+    [key: string]: boolean;
+  };
+};
+
+type FilterAction = {
+  type: "filter";
+  action: Filter;
+};
+
+type FilterAll = {
+  type: "filterAll";
+  action: boolean;
+};
+
+export type OptionActions =
+  | Guess
+  | GlobalState
+  | IncorrectGuess
+  | Reset
+  | FilterAction
+  | FilterAll
+  | AttributeAction;
 
 export interface Set {
   setNum: number;
@@ -154,5 +194,10 @@ export interface FilterOptions {
 export interface Filter {
   category: string;
   filter: string;
+  value: boolean;
+}
+
+export interface Attribute {
+  attribute: string;
   value: boolean;
 }

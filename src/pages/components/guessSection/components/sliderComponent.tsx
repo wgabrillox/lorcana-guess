@@ -1,6 +1,7 @@
 import { Box, FormLabel } from "@mui/material";
 import { useOption, useOptionDispatch } from "../../../optionsContext";
 import Slider from "./slider";
+import { useEffect } from "react";
 
 type Props = {
   label: string;
@@ -11,14 +12,27 @@ type Props = {
   labelWidth?: string;
   width?: number | { [key: string]: number };
   isShowingCard: boolean;
+  trueValue: number | undefined;
 };
 
 export const SliderComponent = (props: Props) => {
-  const { label, min, max, disabled, keyLabel, labelWidth, isShowingCard } =
-    props;
-  const optionState = useOption()?.guessOptionState;
-  const devToolState = useOption()?.devToolOptionState;
-  const incorrectState = useOption()?.incorrectGuessState;
+  const {
+    label,
+    min,
+    max,
+    disabled,
+    keyLabel,
+    labelWidth,
+    isShowingCard,
+    trueValue,
+  } = props;
+
+  const {
+    guessOptionState,
+    globalOptionState,
+    incorrectGuessState,
+    attributeOptionState,
+  } = useOption();
   const optionDispatch = useOptionDispatch();
 
   const optionKey = keyLabel ? keyLabel : label.toLowerCase();
@@ -30,7 +44,26 @@ export const SliderComponent = (props: Props) => {
     });
   };
 
-  const selectedValue = optionState[optionKey];
+  useEffect(() => {
+    if (!attributeOptionState[optionKey]) {
+      optionDispatch!({
+        type: "guess",
+        action: { [optionKey]: trueValue as number },
+      });
+    }
+
+    if (!trueValue) {
+      optionDispatch!({
+        type: "guess",
+        action: { [optionKey]: undefined },
+      });
+    }
+  }, [attributeOptionState, optionDispatch, optionKey, trueValue]);
+
+  const selectedValue =
+    guessOptionState[optionKey] !== undefined
+      ? guessOptionState[optionKey]
+      : null;
 
   const markMax = max ? max - 1 : 9;
   const marks = Array.from({ length: markMax - 1 }, (_, i) => ({
@@ -51,7 +84,9 @@ export const SliderComponent = (props: Props) => {
             md: `${labelWidth ? labelWidth : "default"}`,
           },
         }}
-        error={incorrectState[optionKey] && devToolState.showIncorrect}
+        error={
+          incorrectGuessState[optionKey] && globalOptionState.showIncorrect
+        }
       >
         {label}:
       </FormLabel>
