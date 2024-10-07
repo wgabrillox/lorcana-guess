@@ -76,22 +76,23 @@
 }
 
 @media (max-width: 640px) {
-  .baseLocationEmpty {
-    width: 35px;
-    height: 35px;
-  }
-
   .baseInkEmpty {
-    width: 50px;
-    height: 47px;
+    width: 58px;
+    height: 51px;
   }
 
   .baseLocationEmpty {
     transform: rotate(90deg);
-    right: 6px;
-    top: 5px;
-    height: 48px;
-    width: 48px;
+    right: 0px;
+    top: 2px;
+    height: 55px;
+    width: 60px;
+  }
+
+  .baseLocationCostEmpty {
+    transform: rotate(90deg) scale(0.7);
+    margin-top: 9px;
+    margin-left: 35px;
   }
 
   .baseCardInk {
@@ -100,11 +101,11 @@
   }
 
   .locationInkEmpty {
-    right: 9px;
-    top: 12px;
+    right: 8px;
+    top: 10px;
     transform: rotate(90deg);
     height: 37px;
-    width: 45px;
+    width: 41px;
   }
 
   .inkEmpty {
@@ -115,10 +116,10 @@
   }
 
   .noninkEmpty {
-    width: 42px;
-    height: 42px;
-    top: 3px;
-    left: 7px;
+    width: 39px;
+    height: 38px;
+    top: 6px;
+    left: 10px;
   }
 
   .baseCost {
@@ -126,15 +127,21 @@
     left: 11px;
   }
 
+  .baseCostEmpty {
+    margin-left: 11px;
+    margin-top: 5px;
+    transform: scale(0.8);
+  }
+
   .locationCost {
-    right: 16px;
-    top: 20px;
+    right: 14px;
+    top: 17px;
   }
 
   .locationNoninkEmpty {
     right: 15px;
     top: 14px;
-    height: 37px;
+    height: 31px;
     transform: rotate(90deg);
   }
 }
