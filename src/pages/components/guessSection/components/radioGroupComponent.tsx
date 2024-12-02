@@ -1,7 +1,6 @@
 import { Radio, FormLabel } from "@mui/material";
 import { useOption, useOptionDispatch } from "../../../optionsContext";
 import { Option, CardOptions } from "../../../../types";
-import { useEffect } from "react";
 import { IMAGES, colorIconBackgroundColor } from "../../../../constants";
 
 type Props = {
@@ -43,14 +42,12 @@ export const RadioGroupComponent = (props: Props) => {
 
   const optionKey = keyLabel ? keyLabel : label.toLowerCase();
 
-  useEffect(() => {
-    if (!attributeOptionState[optionKey]) {
-      optionDispatch!({
-        type: "guess",
-        action: { [optionKey]: trueValue },
-      });
-    }
-  }, [attributeOptionState, optionDispatch, optionKey, trueValue]);
+  if (!attributeOptionState[optionKey]) {
+    optionDispatch!({
+      type: "guess",
+      action: { [optionKey]: trueValue },
+    });
+  }
 
   return (
     <>

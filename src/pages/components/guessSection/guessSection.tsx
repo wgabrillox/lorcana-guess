@@ -105,7 +105,6 @@ export const GuessSection = (props: Props) => {
                 width={{ xs: 1, sm: 1, md: 200 }}
                 preselect={isLocation ? "Location" : undefined}
                 disableOption={true}
-                selectedCard={selectedCard}
                 isShowingCard={showSelectNew}
                 trueValue={selectedCard.type}
               />

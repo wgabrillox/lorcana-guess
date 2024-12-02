@@ -1,5 +1,5 @@
-import { Option, CardOptions, Card } from "../../../../types";
-import { useEffect, useMemo } from "react";
+import { Option, CardOptions } from "../../../../types";
+import { useMemo } from "react";
 import { TextField, Autocomplete } from "@mui/material";
 import { useOption, useOptionDispatch } from "../../../optionsContext";
 
@@ -11,7 +11,6 @@ type Props = {
   width?: number | { [key: string]: number };
   preselect?: string;
   disableOption?: boolean;
-  selectedCard?: Card;
   isShowingCard: boolean;
   trueValue: string | undefined;
 };
@@ -25,7 +24,6 @@ export const AutocompleteComponent = (props: Props) => {
     width,
     preselect,
     disableOption,
-    selectedCard,
     isShowingCard,
     trueValue,
   } = props;
@@ -38,7 +36,6 @@ export const AutocompleteComponent = (props: Props) => {
   } = useOption();
 
   const optionDispatch = useOptionDispatch();
-
   const optionKey = keyLabel ? keyLabel : label.toLowerCase();
 
   const selectedValues = useMemo(
@@ -55,20 +52,18 @@ export const AutocompleteComponent = (props: Props) => {
       }
     : {};
 
-  useEffect(() => {
-    if (preselect !== undefined) {
-      optionDispatch!({
-        type: "guess",
-        action: { [optionKey]: preselect! },
-      });
-    }
-    if (!attributeOptionState[optionKey]) {
-      optionDispatch!({
-        type: "guess",
-        action: { [optionKey]: trueValue! },
-      });
-    }
-  }, [optionDispatch, optionKey, preselect, trueValue, attributeOptionState]);
+  if (preselect !== undefined) {
+    optionDispatch!({
+      type: "guess",
+      action: { [optionKey]: preselect! },
+    });
+  }
+  if (!attributeOptionState[optionKey]) {
+    optionDispatch!({
+      type: "guess",
+      action: { [optionKey]: trueValue! },
+    });
+  }
 
   // Remove duplicate values (mainly for body text/description)
   let uniqueValues: Option[] = [];

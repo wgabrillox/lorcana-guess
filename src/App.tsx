@@ -40,31 +40,9 @@ export default function App() {
 
   useEffect(() => {
     axios.get("https://api.lorcana-api.com/bulk/cards").then((res) => {
-      setCards(res.data);
-    });
-    axios.get("https://api.lorcana-api.com/bulk/sets").then((res) => {
-      setSets(
-        res.data
-          .filter((set: Set) => set.setId !== "QU1")
-          .sort((a: Set, b: Set) => {
-            const valueA = a.setNum;
-            const valueB = b.setNum;
+      const cards: Card[] = res.data;
+      setCards(cards);
 
-            if (valueA < valueB) {
-              return -1;
-            }
-            if (valueA > valueB) {
-              return 1;
-            }
-
-            return 0;
-          })
-      );
-    });
-  }, []);
-
-  useEffect(() => {
-    if (cards) {
       let cardTypes: string[] = [];
       const cardOptions = cards.reduce<CardOptions>(
         (acc, card) => {
@@ -96,8 +74,28 @@ export default function App() {
       );
 
       setCardOptions(cardOptions);
-    }
-  }, [cards]);
+    });
+
+    axios.get("https://api.lorcana-api.com/bulk/sets").then((res) => {
+      setSets(
+        res.data
+          .filter((set: Set) => set.setId !== "QU1")
+          .sort((a: Set, b: Set) => {
+            const valueA = a.setNum;
+            const valueB = b.setNum;
+
+            if (valueA < valueB) {
+              return -1;
+            }
+            if (valueA > valueB) {
+              return 1;
+            }
+
+            return 0;
+          })
+      );
+    });
+  }, []);
 
   return (
     <>

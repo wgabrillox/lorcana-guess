@@ -1,7 +1,6 @@
 import { Box, FormLabel } from "@mui/material";
 import { useOption, useOptionDispatch } from "../../../optionsContext";
 import Slider from "./slider";
-import { useEffect } from "react";
 
 type Props = {
   label: string;
@@ -44,21 +43,19 @@ export const SliderComponent = (props: Props) => {
     });
   };
 
-  useEffect(() => {
-    if (!attributeOptionState[optionKey]) {
-      optionDispatch!({
-        type: "guess",
-        action: { [optionKey]: trueValue as number },
-      });
-    }
+  if (!attributeOptionState[optionKey]) {
+    optionDispatch!({
+      type: "guess",
+      action: { [optionKey]: trueValue as number },
+    });
+  }
 
-    if (!trueValue) {
-      optionDispatch!({
-        type: "guess",
-        action: { [optionKey]: undefined },
-      });
-    }
-  }, [attributeOptionState, optionDispatch, optionKey, trueValue]);
+  if (!trueValue) {
+    optionDispatch!({
+      type: "guess",
+      action: { [optionKey]: undefined },
+    });
+  }
 
   const selectedValue =
     guessOptionState[optionKey] !== undefined
