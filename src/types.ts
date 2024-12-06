@@ -169,6 +169,7 @@ export interface FilterOptions {
     ink: boolean;
     urs: boolean;
     ssk: boolean;
+    azs: boolean;
   };
   colors: {
     [key: string]: boolean;

@@ -37,6 +37,7 @@ const initialOptionData = {
       ink: true,
       urs: true,
       ssk: true,
+      azs: true,
     },
     colors: {
       amber: true,
@@ -161,6 +162,7 @@ function optionsReducer(state: OptionState, action: OptionActions) {
             ink: action.action,
             urs: action.action,
             ssk: action.action,
+            azs: action.action,
           },
           colors: {
             amber: action.action,
