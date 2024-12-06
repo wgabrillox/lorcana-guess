@@ -77,6 +77,7 @@ export const CardSelect = (props: Props) => {
                   key={color}
                   control={
                     <Checkbox
+                      id={color}
                       checked={filterState.colors[color.toLowerCase()]}
                       icon={
                         <img

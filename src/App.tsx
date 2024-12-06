@@ -39,32 +39,10 @@ export default function App() {
   const [showGame, setShowGame] = useState(false);
 
   useEffect(() => {
-    axios.get("https://api.lorcana-api.com/bulk/cards").then((res) => {
+    axios.get("https://api.lorcana-api.com/cards/all").then((res) => {
+      const cards: Card[] = res.data;
       setCards(res.data);
-    });
-    axios.get("https://api.lorcana-api.com/bulk/sets").then((res) => {
-      setSets(
-        res.data
-          .filter((set: Set) => set.setId !== "QU1")
-          .sort((a: Set, b: Set) => {
-            const valueA = a.setNum;
-            const valueB = b.setNum;
 
-            if (valueA < valueB) {
-              return -1;
-            }
-            if (valueA > valueB) {
-              return 1;
-            }
-
-            return 0;
-          })
-      );
-    });
-  }, []);
-
-  useEffect(() => {
-    if (cards) {
       let cardTypes: string[] = [];
       const cardOptions = cards.reduce<CardOptions>(
         (acc, card) => {
@@ -96,8 +74,27 @@ export default function App() {
       );
 
       setCardOptions(cardOptions);
-    }
-  }, [cards]);
+    });
+    axios.get("https://api.lorcana-api.com/sets/all").then((res) => {
+      setSets(
+        res.data
+          .filter((set: Set) => set.setId !== "QU1")
+          .sort((a: Set, b: Set) => {
+            const valueA = a.setNum;
+            const valueB = b.setNum;
+
+            if (valueA < valueB) {
+              return -1;
+            }
+            if (valueA > valueB) {
+              return 1;
+            }
+
+            return 0;
+          })
+      );
+    });
+  }, []);
 
   return (
     <>
